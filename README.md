@@ -37,4 +37,4 @@ visual studio 2019
 5. 커뮤니티 카드의 5번째 카드 개봉 후 3차 배팅이 이루어진다.
 
 ## 족보
-![](.github/img/%ED%85%8D%EC%82%AC%EC%8A%A4%20%ED%99%80%EB%8D%A4%20%EC%A1%B1%EB%B3%B4.jpg)
+![](텍사스 홀덤 족보.jpg)
