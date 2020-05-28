@@ -38,4 +38,4 @@ visual studio 2019
 
 ## 족보
 
-http://postfiles11.naver.net/MjAxNzAxMjZfMTY3/MDAxNDg1NDE3ODA5NTg3.nGb_q4vNCpNotnO4_B-cya0jtYZn8DVpkBAFgMRI0iwg.VfJ0Rkkc_hYFBFfRwARWhXVqc3EFbExbsdI72mYF0Uwg.JPEG.wlfla33/5.jpg?type=w2
+https://github.com/Lee-do-yeong/R.S/blob/master-new/%ED%85%8D%EC%82%AC%EC%8A%A4%20%ED%99%80%EB%8D%A4%20%EC%A1%B1%EB%B3%B4.jpg
