@@ -14,11 +14,11 @@ using namespace std;
 
 enum {Half, Quater, Double, Call, All_in, Die} betting;
 
-class card { //(ÀÓ½Ã) Ä«µå Å¬·¡½º
+class card { //(ì„ì‹œ) ì¹´ë“œ í´ë˜ìŠ¤
 public:
 	friend ostream& operator<< (ostream& a, const card& thiscard);
 private:
-	bool status=false; // µŞ¸é false ¾Õ¸é true
+	bool status=false; // ë’·ë©´ false ì•ë©´ true
 	string pat;
 	int cardNumber;
 	int num;
@@ -30,22 +30,22 @@ public:
 	void payMoney(int pay,int &totalBet); 
 	void showMoney();
 	void getCard(card newCard1, card newCard2);
-	bool checkPlayer(); //»ì¾ÆÀÖ´Â ÇÃ·¹ÀÌ¾î Ã¼Å©
+	bool checkPlayer(); //ì‚´ì•„ìˆëŠ” í”Œë ˆì´ì–´ ì²´í¬
 	friend void openCard(player open);
 	int getMyNumber();
 	void takeCard();
 	int getMoney();
-	int inputBet(int& totalBet); // ¸®´õÀÇ ¹èÆÃ ±İ¾× ÀÔ·Â.
-	void playerDie(); // play°¡ false·Î ¹Ù²ñ.
+	int inputBet(int& totalBet); // ë¦¬ë”ì˜ ë°°íŒ… ê¸ˆì•¡ ì…ë ¥.
+	void playerDie(); // playê°€ falseë¡œ ë°”ë€œ.
 private:
-	int used = 0; // ¹ŞÀº Ä«µå °¹¼ö
+	int used = 0; // ë°›ì€ ì¹´ë“œ ê°¯ìˆ˜
 	int gameMoney=0;
-	card myCard[5]; // µô·¯ ¶§¹®¿¡ Å©±â 5·Î º¯°æ
+	card myCard[5]; // ë”œëŸ¬ ë•Œë¬¸ì— í¬ê¸° 5ë¡œ ë³€ê²½
 	int myNumber;
-	bool play = true; //ÀÌ¹ø ÆÇ ´ÙÀÌ¸¦ Ä£ °æ¿ì false·Î º¯°æ
+	bool play = true; //ì´ë²ˆ íŒ ë‹¤ì´ë¥¼ ì¹œ ê²½ìš° falseë¡œ ë³€ê²½
 };
 
-ostream& operator<< (ostream& a, const card& thiscard ) // »èÁ¦ °í·Á
+ostream& operator<< (ostream& a, const card& thiscard ) // ì‚­ì œ ê³ ë ¤
 {
 	a << thiscard.pat << thiscard.cardNumber;
 
@@ -53,7 +53,7 @@ ostream& operator<< (ostream& a, const card& thiscard ) // »èÁ¦ °í·Á
 }
 
 card Deck[52];
-int survivor=5; //°ÔÀÓ ÀüÃ¼ »ıÁ¸ÀÚ
+int survivor=5; //ê²Œì„ ì „ì²´ ìƒì¡´ì
 
 int getKeyBoard();
 void gotoTest();
@@ -63,11 +63,11 @@ void init();
 void drawTitle();
 void selectMenu();
 void setColor(int forground, int background);
+void makeBoard();
 
-
-//-------------------------- Çìµå ¾÷µ¥ÀÌÆ®
+//-------------------------- í—¤ë“œ ì—…ë°ì´íŠ¸
 //card givePlayer(player member[]);
-card drawCard(); // (ÀÓ½Ã)Ä«µå »Ì±â
+card drawCard(); // (ì„ì‹œ)ì¹´ë“œ ë½‘ê¸°
 void giveCard(int survive, int leader);
 void obliBet(player member[], int& totalBet);
 void openCard(player open);
@@ -76,5 +76,5 @@ int checkCard() {
 	return 0;
 };
 void choiceBet(player member[], const int gambler, int leader,int& totalBet);
-int choiceLeader(player member[], const int gambler); // °¡Àå ±İ¾× ³ôÀº »ç¶÷ÀÌ Ã¹ ¹èÆÃ ¸®´õ
+int choiceLeader(player member[], const int gambler); // ê°€ì¥ ê¸ˆì•¡ ë†’ì€ ì‚¬ëŒì´ ì²« ë°°íŒ… ë¦¬ë”
 void choiceBet(player& follwer, int &betMoney, int& totalBet);
