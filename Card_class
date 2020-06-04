@@ -1,0 +1,19 @@
+class Card {
+private:
+	string SPADE; // = "♠";
+	string HEART; //  = "♡";
+	string DIAMOND; // = "◇";
+	string CLOVER; // ="♣";
+
+	int number;
+	int height;
+public:
+	Card(int number); //카드에 번호 넣기
+	void show(); //카드 보여주기
+	Card() {
+		number = 51;
+		SPADE = "♠";
+		HEART = "♡";
+		DIAMOND = "◇";
+		CLOVER = "♣";
+	}
