@@ -1,0 +1,17 @@
+--플레이어 구상 해야할것
+가지고있는 카드, 돈, 배팅금액, 확률 위치 
+카드받기- 
+
+---
+class Player{
+private : 
+	Card card[7];	// 가지고 있는 카드
+	int money;		// 가지고 있는 돈
+	int pileMoney;	// 배팅한 누적금액
+public :
+	// 생성자
+	Player(){}
+	Player(int type, int money, ){
+		Init_Player(type,money,;
+	}
+---
