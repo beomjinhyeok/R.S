@@ -28,4 +28,6 @@ int menuChoice();
 void gameImage();
 void gameRule();
 void player(int x, int y);
+void bettingNumber();
+int bettingMenuChoice();
 
