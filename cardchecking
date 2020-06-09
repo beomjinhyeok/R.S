@@ -1,0 +1,191 @@
+#include <iostream>
+#include <time.h>
+# include <algorithm>
+
+using namespace std;
+
+typedef enum
+{
+    CLOVER♣, HEART♥, DIAMOND◆, SPADE♠
+}Pattern;
+
+typedef enum
+{
+    TWO = 2, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
+}Number;
+
+class Card {
+public:
+    Pattern Pat; // clover♣, heart♥, diamond◆, spade♠
+    Number Num;
+};
+
+int main()
+{
+    srand(time(NULL));
+    int i = 0;
+    int j;
+    int count = 0;
+    int A, B;
+    Card card_deck[52];
+    Card temp;
+    int fullCount = 52;
+    char YesNo;
+    int N = 0;
+    
+    //do {
+    //    if(i==0)
+    //        for (j = 0; j < 14; j++) //2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+    //        {
+    //            int count1 = 0;
+    //            card_deck[count].Pat = CLOVER♣;
+    //            card_deck[count].Num = TWO;
+    //            card_deck[count].Num = THREE;
+    //            card_deck[count].Num = FOUR;
+    //            card_deck[count].Num = FIVE;
+    //            card_deck[count].Num = SIX;
+    //            card_deck[count].Num = SEVEN;
+    //            card_deck[count].Num = EIGHT;
+    //            card_deck[count].Num = NINE;
+    //            card_deck[count].Num = TEN;
+    //            card_deck[count].Num = JACK;
+    //            card_deck[count].Num = QUEEN;
+    //            card_deck[count].Num = KING;
+    //            card_deck[count].Num = ACE;
+
+    //            count1++;
+    //        }
+
+    //    if (i == 1)
+    //        for (j = 2; j < 15; j++) //2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+    //        {
+    //            int count2 = 13;
+    //            card_deck[count].Pat = HEART♥;
+    //            card_deck[count].Num = ;
+    //            count2++;
+    //        }
+
+    //    if (i == 2)
+    //        for (j = 2; j < 15; j++) //2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+    //        {
+    //            int count3 = 26;
+    //            card_deck[count].Pat = DIAMOND◆;
+    //            card_deck[count].Num = ;
+    //            count3++;
+    //        }
+
+    //    if (i == 3)
+    //        for (j = 2; j < 15; j++) //2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+    //        {
+    //            int count4 = 40;
+    //            card_deck[count].Pat = SPADE♠;
+    //            card_deck[count].Num = ;
+    //            count4++;
+    //        }
+    //        i++
+    //} while (i < 4);
+
+            //cout << card_deck[30].Num << card_deck[30].Pat << endl;
+    
+    for (int i = 0; i < 52; i++)
+    {
+        cout << card_deck[i].Num << card_deck[i].Pat << endl;
+    }
+    return 0;
+}
+
+typedef enum
+{
+    High_card=1, // 보드와 무관한 카드 숫자가 높은 사람이 이김
+          //카드 숫자가 모두 똑같으면 비김 // 1
+//문양따라가는걸로 순위 매김
+    One_pair, // 같은숫자 2개 1쌍 //2
+    Two_pair, // 같은 숫자 2개 2쌍 //3
+    Triple, //같은숫자 3개 //4
+    Straight, //연속된 숫자 5개 //5
+    Flush, //같은문양 5개 //6
+    Full_house, // 트리플 + 원페어 //7
+    Four_card, // 같은숫자 4개 //8
+	Straight_flush //같은문양, 숫자 오름차순 5개 //9
+}Pedigree;
+
+//Card card1[4];
+//
+//const int HAND = 5;
+//
+////카드를 숫자 기준 내림차순 정렬한다.
+//
+//    bool desc(int a, int b) {
+//        return a > b;
+//    }
+//
+//    sort(Card1[0], Card1 [3], desc);
+//
+//// 카드를 숫자 기준으로 내림차순 정렬한다. 정렬알고리즘은 개나소나 아니까 패스.
+//
+//   // 카드가 5장밖에 안되니 그냥 버블정렬이나 선택정렬 사용하면 됨
+//
+//    // 스트레이트 확인
+//
+//    int straightCounter = 0;
+//
+//    for (i = 1; i < HAND; ++i)
+//        if (cards[i].rank == cards[i - 1].rank - 1)
+//            ++straightCounter;
+//
+//    if (straightCounter == HAND - 1)
+//    {
+//        straight = true;   // 스트레이트
+//        if (cards[0].rank == ACE) royal = true;
+//    }
+//
+//    else if (straightCounter == HAND - 2 &&
+//
+//        cards[0].rank == ACE && cards[1].rank == FIVE)
+//
+//        straight = true;   // wheel (A 2 3 4 5 스트레이트)
+//
+//    // 플러시 확인
+//    for (i = 1; i < HAND; ++i)
+//
+//        if (cards[i].suit != cards[i - 1].suit) break;
+//
+//    if (i == HAND) flush = true; // 플러시
+//
+//    // 같은숫자 확인
+//
+//    int numRanks[NUM_RANK] = { 0 };
+//    for (i = 0; i < HAND; ++i) ++numRanks[cards[i].rank];
+//    for (i = 0; i < NUM_ENRANK; ++i)
+//        switch (numRanks[i])
+//        {
+//        case 2: ++numPair; break; // pair
+//        case 3: ToK = true; break; // triple
+//        case 4: FoK = true; break; // fourcard
+//        }
+//
+//    // 최종 타입 결정
+//
+//    Pedigree Type = High_card;
+//
+//    if (royal && flush)
+//        Type = RoyalFlush;
+//    else if (straight && flush) 
+//        Type = StraightFlush;
+//    else if (FoK)         
+//        Type = Four_card;
+//    else if (ToK && numPair == 1)
+//        Type = Full_house;
+//    else if (flush)      
+//        Type = Flush;
+//    else if (straight)    
+//        Type = Straight;
+//    else if (ToK)         
+//        Type = Triple;
+//    else if (numPair == 2)     
+//        Type = Two_pair;
+//    else if (numPair == 1)    
+//        Type = One_pair;
+//
+//    return Type;
+//}
