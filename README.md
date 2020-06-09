@@ -12,7 +12,7 @@
 
 [R.S Team Project](https://crash-landing.github.io/)
 
-[프로젝트 일정](https://github.com/Lee-do-yeong/R.S.wiki.git)
+[프로젝트 일정](https://github.com/Lee-do-yeong/R.S/wiki/프로젝트-일정)
 
 windows 버전에서만 가능
 
