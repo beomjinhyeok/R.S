@@ -10,7 +10,7 @@ void setColor(int back, int text)
 
 void init()
 {
-	system("mode con cols=180 lines=50 | title 텍사스 홀덤 ");
+	system("mode con cols=176 lines=50 | title 텍사스 홀덤 ");
 
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO ConsoleCursor;
@@ -111,28 +111,39 @@ int menuChoice()
 }
 
 void gameImage()
-{
+{	
 	system("color 02");
 	system("cls");
 	setColor(GREEN, GREEN);
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 35; i++)
 	{
-		gotoxy(45, 10 + i);
-		cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
+		gotoxy(30, i);
+		cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
 	}
-	player(30, 15);
-	player(60, 3);
-	player(110, 3);
-	player(140, 15);
+	player(10, 3);
+	cout << "도영";
+	player(10, 18);
+	cout << "진혁";
+	player(150, 3);
+	cout << "정훈";
+	player(150, 18);
+	cout << "강민";
+	gotoxy(80, 35); cout << "  참가자";
 
-	while (1)
+	gotoxy(70, 40); cout << "콜";
+	gotoxy(80, 40); cout << "다이";
+	gotoxy(90, 40); cout << "더블";
+	gotoxy(100, 40); cout << "하프";
+	gotoxy(110, 40); cout << "올인";
+
+	/*while (1)
 	{
 		if (keyControl() == CHOICE)
 		{
 			system("color F5");
 			break;
 		}
-	}
+	}*/
 }
 
 void gameRule()
@@ -150,12 +161,115 @@ void gameRule()
 
 void player(int x, int y)
 {
+	int coin = 50;
 	setColor(BLACK, WHITE);
-	gotoxy(x, y);     cout << "□□□□□□□\n";
-	gotoxy(x, y + 1); cout << "□■□□□■□\n";
-	gotoxy(x, y + 2); cout << "□□□■□□□\n";
-	gotoxy(x, y + 3); cout << "□□□■□□□\n";
-	gotoxy(x, y + 4); cout << "■□□□□□■\n";
-	gotoxy(x, y + 5); cout << "□■■■■■□\n";
+	gotoxy(x, y - 2); cout << "  남은 칩: " << coin << endl;
+	gotoxy(x, y);     cout << "■■■■■■■■\n";
+	gotoxy(x, y + 1); cout << "■□□■■□□■\n";
+	gotoxy(x, y + 2); cout << "■□□■■□□■\n";
+	gotoxy(x, y + 3); cout << "■■■□□■■■\n";
+	gotoxy(x, y + 4); cout << "■□■■■■□■\n";
+	gotoxy(x, y + 5); cout << "■□□□□□□■\n\n";
+	gotoxy(x, y + 6); cout << "■■■■■■■■\n\n";
+	gotoxy(x, y + 8); cout << "  참가자: ";
+}					
+
+int bettingMenuChoice()
+{
+	int x = 70;
+	int y = 40;
+	gotoxy(x-2, y);    cout << "> 콜";
+	gotoxy(x + 10, y); cout << "다이";
+	gotoxy(x + 20, y); cout << "더블";
+	gotoxy(x + 30, y); cout << "하프";
+	gotoxy(x + 40, y); cout << "올인";
+	while (1) {
+		int n = keyControl();
+		switch (n) {
+		case RIGHT: 
+		{
+			if (x < 110) 
+			{	
+				gotoxy(x - 2, y); cout << " ";
+				x = x + 10;
+				gotoxy(x - 2, y); cout << ">";
+			}
+			break;
+		}
+
+		case LEFT:
+		{
+			if (x > 70)
+			{
+				gotoxy(x - 2, y); cout << " ";
+				x = x - 10;
+				gotoxy(x - 2, y); cout << ">";
+			}
+			break;
+		}
+
+		case CHOICE:
+		{
+			return x - 70;
+		}
+
+		}
+	}
+
+}
+
+void bettingNumber() 
+{
+	while (1) {
+		int bettingMenuNumber = bettingMenuChoice(); // 베팅메뉴 선택 함수
+		if (bettingMenuNumber == 0) // 콜
+		{
+			gotoxy(80, 17); cout << "------------";
+			gotoxy(80, 18); cout << "콜!!!!!!!!|";
+			gotoxy(80, 19); cout << "------------";
+		}
+		else if (bettingMenuNumber == 10) // 다이
+		{
+			gotoxy(80, 17); cout << "------------";
+			gotoxy(80, 18); cout << "다이!!!!!!!|";
+			gotoxy(80, 19); cout << "------------";
+		}
+		else if (bettingMenuNumber == 20) // 더블
+		{
+			gotoxy(80, 17); cout << "------------";
+			gotoxy(80, 18); cout << "더블!!!!!!!|";
+			gotoxy(80, 19); cout << "------------";
+		}
+		else if (bettingMenuNumber == 30) // 하프
+		{
+			gotoxy(80, 17); cout << "------------";
+			gotoxy(80, 18); cout << "하프!!!!!!!|";
+			gotoxy(80, 19); cout << "------------";
+		}
+		else if (bettingMenuNumber == 40) // 올인
+		{
+			gotoxy(80, 17); cout << "------------";
+			gotoxy(80, 18); cout << "올인!!!!!!!|";
+			gotoxy(80, 19); cout << "------------";
+		}
+	}
+}
+
+void victoryPrint()
+{
+	gotoxy(80, 17); cout << "------------------------";
+	gotoxy(80, 18); cout << "|                       |-";
+	gotoxy(80, 19); cout << "|      승리!!!!!!!      |";
+	gotoxy(80, 20); cout << "|                       |";
+	gotoxy(80, 21); cout << "------------------------";
+}
+
+void defeatPrint()
+{
+	gotoxy(80, 17); cout << "------------------------";
+	gotoxy(80, 18); cout << "|                       |-";
+	gotoxy(80, 19); cout << "|      패배!!!!!!!      |";
+	gotoxy(80, 20); cout << "|                       |";
+	gotoxy(80, 21); cout << "------------------------";
 }
 
