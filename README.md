@@ -11,7 +11,7 @@
 | 201716946 | 임정훈 | 게임진행구현(컴퓨터), 홈페이지 제작|
 
 [R.S Team Project](https://crash-landing.github.io/)
-
+[프로젝트 일정](https://github.com/Lee-do-yeong/R.S.wiki.git)
 windows 버전에서만 가능
 
 visual studio 2019
