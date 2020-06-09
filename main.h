@@ -22,13 +22,13 @@ using namespace std;
 void setColor(int back, int text);
 void init();
 void gotoxy(int x, int y);
-void introGame();      // 게임 시작화면을 불러오는 함수
-int keyControl();
-int menuChoice();
-void gameImage();
-void gameRule();
-void player(int x, int y);
-void bettingNumber();
-int bettingMenuChoice();
-void victoryPrint();
-void defeatPrint();
+void introGame(); // 게임 시작화면 함수
+int keyControl(); // 방향키로 메뉴 선택 함수
+int menuChoice(); // 시작화면 메뉴 선택 함수
+void gameImage(); // 게임화면 이미지 출력 함수
+void gameRule(); // 게임 룰 화면 함수
+void player(int x, int y); // 컴퓨터 플레이어 이미지 출력 함수
+void bettingNumber(); // 베팅 메뉴 선택 함수
+int bettingMenuChoice(); // 베팅 메뉴 이름 출력 함수
+void victoryPrint(); // 승리 시 화면 출력
+void defeatPrint();  // 패배 시 화면 출력
