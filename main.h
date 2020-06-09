@@ -30,4 +30,5 @@ void gameRule();
 void player(int x, int y);
 void bettingNumber();
 int bettingMenuChoice();
-
+void victoryPrint();
+void defeatPrint();
