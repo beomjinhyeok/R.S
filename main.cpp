@@ -1,23 +1,22 @@
 #pragma once
-
 #include "main.h"
 
 int main()
 {
-	init(); //Ã¢ Å©±â¿Í Á¦¸ñ ¼³Á¤ ÇÔ¼ö
+	init(); //ì°½ í¬ê¸°ì™€ ì œëª© ì„¤ì • í•¨ìˆ˜
 	while (1) {
-		introGame(); // ½ÃÀÛÈ­¸éÀÇ Ç¥½ÃºÎºĞ ÇÔ¼ö
-		int menuNumber = menuChoice(); // ¸Ş´º ¼±ÅÃ ÇÔ¼ö
-		if (menuNumber == 0) //°ÔÀÓ ½ÃÀÛ ¹öÆ°
+		introGame(); // ì‹œì‘í™”ë©´ì˜ í‘œì‹œë¶€ë¶„ í•¨ìˆ˜
+		int menuNumber = menuChoice(); // ë©”ë‰´ ì„ íƒ í•¨ìˆ˜
+		if (menuNumber == 0) //ê²Œì„ ì‹œì‘ ë²„íŠ¼
 		{
 			gameImage();
-			bettingNumber(); // º£ÆÃ Á¾·ù¸¦ ¼±ÅÃÇÏ´Â ÇÔ¼ö
+			bettingNumber(); // ë² íŒ… ì¢…ë¥˜ë¥¼ ì„ íƒí•˜ëŠ” í•¨ìˆ˜
 		}
-		else if (menuNumber == 1) // °ÔÀÓ ±ÔÄ¢ ¼³¸í
+		else if (menuNumber == 1) // ê²Œì„ ê·œì¹™ ì„¤ëª…
 		{
 			gameRule();
 		}
-		else if (menuNumber == 2) // °ÔÀÓ Á¾·á ¹öÆ°
+		else if (menuNumber == 2) // ê²Œì„ ì¢…ë£Œ ë²„íŠ¼
 		{
 			return 0;
 		}
