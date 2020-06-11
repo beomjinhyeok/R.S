@@ -1,5 +1,6 @@
 ﻿#include "main.h"
 
+
 void setColor(int back, int text)
 {
 	HANDLE hcon;
