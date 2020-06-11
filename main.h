@@ -17,7 +17,7 @@ using namespace std;
 #define DOWN 80
 #define RIGHT 77
 #define LEFT 75
-#define CHOICE 4
+#define CHOICE 13
 
 void setColor(int back, int text);
 void init();
