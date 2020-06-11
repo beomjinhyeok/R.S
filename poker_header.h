@@ -32,7 +32,6 @@ public:
 	void showMoney();
 	void getCard(card newCard1, card newCard2);
 	bool checkPlayer(); //살아있는 플레이어 체크
-	friend void openCard(player open);
 	void takeCard();
 	int getMoney();
 	int inputBet(int& totalBet); // 리더의 배팅 금액 입력.
@@ -44,7 +43,9 @@ public:
 	void halfBet(int &betMoney,int & totalBet);
 	void dieAllMoney(int& totalMoney);
 	bool nowPlay();
-private:
+	void checkSurvivor();
+	
+protected:
 	int used; // 받은 카드 갯수
 	int gameMoney;
 	card myCard[5]; // 딜러 때문에 크기 5로 변경
@@ -70,7 +71,6 @@ int survivor=5; //게임 전체 생존자
 //-------------------------- 헤드 업데이트
 card drawCard(); // (임시)카드 뽑기
 void obliBet(player member[], int& totalBet);
-void openCard(player open);
 void playGame(player member[],player &gambler);
 int checkCard() {
 	return 0;
@@ -79,3 +79,6 @@ void choiceBet(player member[], int &gambler, int leader,int& totalBet);
 int choiceLeader(player member[], const int gambler); // 가장 금액 높은 사람이 첫 배팅 리더
 void choiceFollower(player& follwer, int &betMoney, int& totalBet, int& gambler,int &bet);
 void cant_Bet(player& follwer, int& betMoney, int& gambler,int& totalBet);
+void endGame();
+void checkOutCom(player member[]);
+void resetGame();
