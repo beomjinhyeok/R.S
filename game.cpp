@@ -9,6 +9,28 @@ card drawCard()
 	return drawCard();
 }
 
+void endGame()
+{
+	checkCard(); //임시 족보 비교 함수
+
+
+}
+
+void resetGame()
+{
+
+}
+
+void checkOutCom(player member[])
+{
+	for (int i = 0; i < survivor; i++)
+	{
+		if (member[i].getMoney == 0)
+		{
+
+		}
+	}
+}
 
 void choiceBet(player member[], int& gambler, int leader, int &totalBet)
 {
@@ -31,9 +53,7 @@ void choiceBet(player member[], int& gambler, int leader, int &totalBet)
 			while (betMoney == 0) //만약 리더가 다이한 경우
 			{
 				if (gambler==1) // 한 명빼고 gambler가 없을 경우
-				{
 					break;
-				}
 				nowBet = gambler % (nowBet + 1);
 				betMoney = member[nowBet].leaderBet(totalBet,gambler);
 			}
@@ -88,6 +108,8 @@ void choiceFollower(player& follower,int& betMoney,int& totalBet,int& gambler, i
 	}
 }
 
+
+
 void cant_Bet(player& follwer, int& betMoney,int &gambler,int & totalBet)
 {
 	int choice;
@@ -123,11 +145,6 @@ void obliBet(player member[],int &totalBet) // 의무 배팅
 	cout << totalBet << endl;
 }
 
-void openCard(player open) // 인터페이스 요소 생각중
-{
-	cout << open.myCard[0]; 
-	cout << open.myCard[1];
-}
 
 
 int choiceLeader(player member[],const int gambler) // 손봐야함
@@ -146,13 +163,12 @@ int choiceLeader(player member[],const int gambler) // 손봐야함
 }
 
 
-
 void playGame(player member[],player& dealer) // 게임 진행
 {
 	int totalBet = 0, leader;
 	int gambler=survivor;
 	obliBet(member,totalBet);
-	//givePlayer(member);
+
 	for (int i = 0; i < gambler; i++) // 2장씩 배팅
 	{
 		member[i].takeCard;
@@ -164,13 +180,22 @@ void playGame(player member[],player& dealer) // 게임 진행
 	
 	leader = choiceLeader(member, gambler); // 리더는 한 번만 정하면 다음부터는 오른쪽 사람이 리더
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		
+		choiceBet(member, gambler, leader, totalBet);
+		if (gambler == 1)
+			break;
+		if (i != 2) {
+			dealer.takeCard;
+			do
+			{
+				leader = gambler % (leader + 1);
+			} while (member[leader].checkPlayer == false);
+		}
 	}
 
-
 }
+
 
 //진행 상황 - 의무 배팅 구현, 카드 2장 주기 구현, 딜러 카드 3장 구현, 리더 선택 구현, 리더 배팅 구현, 팔로워 배팅 구현(예외사항 적용중)
 

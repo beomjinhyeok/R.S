@@ -124,3 +124,11 @@ bool player::nowPlay()
 {
 	return play;
 }
+
+void player::checkSurvivor()
+{
+	if (die == true)
+		true;
+	else
+		false;
+}
