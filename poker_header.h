@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
@@ -12,7 +11,6 @@ using namespace std;
 #define RIGHT 3
 #define CHOICE 4
 
-enum {Half, Quater, Double, Call, All_in, Die} betting;
 
 class card { //(임시) 카드 클래스
 public:
@@ -22,7 +20,6 @@ private:
 	string pat;
 	int cardNumber;
 	int num;
-
 };
 
 class player {
@@ -53,18 +50,7 @@ protected:
 	bool die; //이번판 아웃된 경우
 };
 
-player::player() : used(0),gameMoney(0),play(true), die(false)
-{}
 
-ostream& operator<< (ostream& a, const card& thiscard ) // 삭제 고려
-{
-	a << thiscard.pat << thiscard.cardNumber;
-
-	return a;
-}
-
-card Deck[52];
-int survivor=5; //게임 전체 생존자
 
 
 
@@ -72,9 +58,7 @@ int survivor=5; //게임 전체 생존자
 card drawCard(); // (임시)카드 뽑기
 void obliBet(player member[], int& totalBet);
 void playGame(player member[],player &gambler);
-int checkCard() {
-	return 0;
-};
+int checkCard();
 void choiceBet(player member[], int &gambler, int leader,int& totalBet);
 int choiceLeader(player member[], const int gambler); // 가장 금액 높은 사람이 첫 배팅 리더
 void choiceFollower(player& follwer, int &betMoney, int& totalBet, int& gambler,int &bet);
@@ -82,3 +66,6 @@ void cant_Bet(player& follwer, int& betMoney, int& gambler,int& totalBet);
 void endGame();
 void checkOutCom(player member[]);
 void resetGame();
+
+//---------------------------------- -
+void nowWho(int& nowBet);
