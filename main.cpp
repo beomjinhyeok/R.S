@@ -1,22 +1,25 @@
 #pragma once
 #include "main.h"
+int Play_number[6] = { 0 }, Computer_number[6] = { 0 }, Play_pattern[6] = { 0 }, Computer_pattern[6] = { 0 };
+
 
 int main()
 {
-	init(); //ì°½ í¬ê¸°ì™€ ì œëª© ì„¤ì • í•¨ìˆ˜
+	init(); //Ã¢ Å©±â¿Í Á¦¸ñ ¼³Á¤ ÇÔ¼ö
 	while (1) {
-		introGame(); // ì‹œì‘í™”ë©´ì˜ í‘œì‹œë¶€ë¶„ í•¨ìˆ˜
-		int menuNumber = menuChoice(); // ë©”ë‰´ ì„ íƒ í•¨ìˆ˜
-		if (menuNumber == 0) //ê²Œì„ ì‹œì‘ ë²„íŠ¼
+		introGame(); // ½ÃÀÛÈ­¸éÀÇ Ç¥½ÃºÎºĞ ÇÔ¼ö
+		int menuNumber = menuChoice(); // ¸Ş´º ¼±ÅÃ ÇÔ¼ö
+		if (menuNumber == 0) //°ÔÀÓ ½ÃÀÛ ¹öÆ°
 		{
 			gameImage();
-			bettingNumber(); // ë² íŒ… ì¢…ë¥˜ë¥¼ ì„ íƒí•˜ëŠ” í•¨ìˆ˜
+			bettingNumber(); // º£ÆÃ Á¾·ù¸¦ ¼±ÅÃÇÏ´Â ÇÔ¼ö
+			picture(Play_number, Play_pattern, Computer_number, Computer_pattern);
 		}
-		else if (menuNumber == 1) // ê²Œì„ ê·œì¹™ ì„¤ëª…
+		else if (menuNumber == 1) // °ÔÀÓ ±ÔÄ¢ ¼³¸í
 		{
 			gameRule();
 		}
-		else if (menuNumber == 2) // ê²Œì„ ì¢…ë£Œ ë²„íŠ¼
+		else if (menuNumber == 2) // °ÔÀÓ Á¾·á ¹öÆ°
 		{
 			return 0;
 		}

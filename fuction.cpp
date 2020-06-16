@@ -1,6 +1,5 @@
 ﻿#include "main.h"
 
-
 void setColor(int back, int text)
 {
 	HANDLE hcon;
@@ -288,3 +287,190 @@ void defeatPrint()
 	introGame(); // 시작화면의 표시부분 함수
 }
 
+void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
+{
+	int shape[5] = { 0,1,2,3,4 };
+	int num1ber[14] = { 0,2,3,4,5,6,7,8,9,10,11,12,13,1 };
+	int x = 28, y = 29;
+	int i, j, k, v = 1, hide = 0;		//hide 0 숨김, 1 표시
+	int get = 3;
+	int num1 = 0, num2 = 0;
+	for (k = 0; k < 2; k++)
+	{
+		if (k == 0) // 현재 뒷면인 상태
+		{
+			for (i = 0;i < 4;i++)
+			{
+				num1 = 0;
+				for (j = 0;j < 25;j++)
+				{
+					Sleep(10);
+					gotoxy(x - num1, 8); printf("┏━━━━┓");
+					gotoxy(x - num1, 9); printf("┃?       ┃");
+					gotoxy(x - num1, 10);printf("┃        ┃");
+					gotoxy(x - num1, 11);printf("┃   ??   ┃");
+					gotoxy(x - num1, 12);printf("┃        ┃");
+					gotoxy(x - num1, 13);printf("┃       ?┃");
+					gotoxy(x - num1, 14);printf("┗━━━━┛");
+					num1 += 1;
+				}
+				x += 2;
+			}
+			num1 = 0;
+			for (i = 0;i < 4;i++)
+			{
+				num1 = 1;
+				if (i % 2 == 1)
+				{
+					num1 *= -1;
+				}
+				for (j = 0;j < 7;j++)
+				{
+					Sleep(20);
+					if (i % 2 == 0)
+					{
+						gotoxy(10 - num2, 15 - num1);printf("          ");
+					}
+					gotoxy(10 - num2, 8 - num1);printf("┏━━━┓");
+					gotoxy(10 - num2, 9 - num1);printf("┃?     ┃");
+					gotoxy(10 - num2, 10 - num1);printf("┃      ┃");
+					gotoxy(10 - num2, 11 - num1);printf("┃   ?  ┃");
+					gotoxy(10 - num2, 12 - num1);printf("┃      ┃");
+					gotoxy(10 - num2, 13 - num1);printf("┃     ?┃");
+					gotoxy(10 - num2, 14 - num1);printf("┗━━━┛");
+					if (i % 2 == 1)
+					{
+						gotoxy(10 - num2, 7 - num1);printf("          ");
+					}
+					if (i % 2 == 0)
+						num1 += 1;
+					else
+						num1 -= 1;
+				}
+				num2 += 2;
+			}
+			system("cls");
+			gameImage();
+		}
+		else
+		{
+			gotoxy(5, 8); printf("computer");		//컴퓨터와 사용자를 표시.
+			gotoxy(5, 14); printf("Y  o  u");
+			num1 = 0;
+			num2 = 0;
+			j = 1;
+			for (i = 0;i < 10;i++)
+			{
+				if (i % 2 == 0)
+				{
+					if (i > get)
+					{
+						get += 2;
+						hide = 1;
+						_getch();
+					}
+					//white();
+					gotoxy(4 + num1, 1);printf("┏━━━┓");
+					gotoxy(4 + num1, 2);printf("┃?     ┃");
+					gotoxy(4 + num1, 3);printf("┃      ┃");
+					gotoxy(4 + num1, 4);printf("┃   ?  ┃");
+					gotoxy(4 + num1, 5);printf("┃      ┃");
+					gotoxy(4 + num1, 6);printf("┃     ?┃");
+					gotoxy(4 + num1, 7);printf("┗━━━┛");
+					//					if(hide != 1){
+					if (shape[shape_rand[j]] == 4) {
+						//white();
+						gotoxy(6 + num1, 2);printf("♠");
+						gotoxy(10 + num1, 6);printf("♠");
+					}
+					else if (shape[shape_rand[j]] == 2) {
+						//red();
+						gotoxy(6 + num1, 2);printf("♥");
+						gotoxy(10 + num1, 6);printf("♥");
+					}
+					else if (shape[shape_rand[j]] == 1) {
+						//white();
+						gotoxy(6 + num1, 2);printf("♣");
+						gotoxy(10 + num1, 6);printf("♣");
+					}
+					else if (shape[shape_rand[j]] == 3) {
+						//red();
+						gotoxy(6 + num1, 2);printf("◆");
+						gotoxy(10 + num1, 6);printf("◆");
+					}
+					if (num1ber[num1_rand[j]] == 1) {
+						gotoxy(9 + num1, 4);printf("A");
+					}
+					else if (num1ber[num1_rand[j]] == 11) {
+						gotoxy(9 + num1, 4);printf("J");
+					}
+					else if (num1ber[num1_rand[j]] == 12) {
+						gotoxy(9 + num1, 4);printf("Q");
+					}
+					else if (num1ber[num1_rand[j]] == 13) {
+						gotoxy(9 + num1, 4);printf("K");
+					}
+					else if (num1ber[num1_rand[j]] == num1_rand[j]) {
+						gotoxy(8 + num1, 4);printf("%2d", num1_rand[j]);
+					}
+					//					}
+					num1 += 12;
+					j++;			//배열을 1칸씩 증가 시킨다.
+				}
+				else
+				{
+					if (i > get)
+					{
+						_getch();
+					}
+					Sleep(300);
+					//white();
+					gotoxy(4 + num2, 15);printf("┏━━━┓");
+					gotoxy(4 + num2, 16);printf("┃      ┃");
+					gotoxy(4 + num2, 17);printf("┃      ┃");
+					gotoxy(4 + num2, 18);printf("┃      ┃");
+					gotoxy(4 + num2, 19);printf("┃      ┃");
+					gotoxy(4 + num2, 20);printf("┃      ┃");
+					gotoxy(4 + num2, 21);printf("┗━━━┛");
+					if (shape[shape_rand2[v]] == 4) {
+						//white();
+						gotoxy(6 + num2, 16);printf("♠");
+						gotoxy(10 + num2, 20);printf("♠");
+					}
+					else if (shape[shape_rand2[v]] == 2) {
+						//red();
+						gotoxy(6 + num2, 16);printf("♥");
+						gotoxy(10 + num2, 20);printf("♥");
+					}
+					else if (shape[shape_rand2[v]] == 1) {
+						//white();
+						gotoxy(6 + num2, 16);printf("♣");
+						gotoxy(10 + num2, 20);printf("♣");
+					}
+					else if (shape[shape_rand2[v]] == 3) {
+						//red();
+						gotoxy(6 + num2, 16);printf("◆");
+						gotoxy(10 + num2, 20);printf("◆");
+					}
+					if (num1ber[num1_rand2[v]] == 1) {
+						gotoxy(9 + num2, 18);printf("A");
+					}
+					else if (num1ber[num1_rand2[v]] == 11) {
+						gotoxy(9 + num2, 18);printf("J");
+					}
+					else if (num1ber[num1_rand2[v]] == 12) {
+						gotoxy(9 + num2, 18);printf("Q");
+					}
+					else if (num1ber[num1_rand2[v]] == 13) {
+						gotoxy(9 + num2, 18);printf("K");
+					}
+					else if (num1ber[num1_rand2[v]] == num1_rand2[v]) {
+						gotoxy(8 + num2, 18);printf("%2d", num1_rand2[v]);
+					}
+					num2 += 12;
+					v++; //배열을 한칸씩 증가시킨다.
+				}
+			}
+		}
+	}
+}

@@ -3,8 +3,10 @@
 #include <Windows.h>
 #include <conio.h>
 
+const char shape[5][10] = { "zero", "spade", "diamonds", "cluber", "heart" };
+const char num1ber[14][7] = { "zero","two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace" };
 
-enum Color  //ì½˜ì†”ì—ì„œ ì‚¬ìš©í•˜ëŠ” ìƒ‰ìƒ
+enum Color  //ÄÜ¼Ö¿¡¼­ »ç¿ëÇÏ´Â »ö»ó
 {
     BLACK, BLUE, GREEN, CYAN,
     RED, MAGENTA, BROWN, LIGHTGRAY,
@@ -23,13 +25,14 @@ using namespace std;
 void setColor(int back, int text);
 void init();
 void gotoxy(int x, int y);
-void introGame(); // ê²Œì„ ì‹œì‘í™”ë©´ í•¨ìˆ˜
-int keyControl(); // ë°©í–¥í‚¤ë¡œ ë©”ë‰´ ì„ íƒ í•¨ìˆ˜
-int menuChoice(); // ì‹œì‘í™”ë©´ ë©”ë‰´ ì„ íƒ í•¨ìˆ˜
-void gameImage(); // ê²Œì„í™”ë©´ ì´ë¯¸ì§€ ì¶œë ¥ í•¨ìˆ˜
-void gameRule(); // ê²Œì„ ë£° í™”ë©´ í•¨ìˆ˜
-void player(int x, int y); // ì»´í“¨í„° í”Œë ˆì´ì–´ ì´ë¯¸ì§€ ì¶œë ¥ í•¨ìˆ˜
-void bettingNumber(); // ë² íŒ… ë©”ë‰´ ì„ íƒ í•¨ìˆ˜
-int bettingMenuChoice(); // ë² íŒ… ë©”ë‰´ ì´ë¦„ ì¶œë ¥ í•¨ìˆ˜
-void victoryPrint(); // ìŠ¹ë¦¬ ì‹œ í™”ë©´ ì¶œë ¥
-void defeatPrint();  // íŒ¨ë°° ì‹œ í™”ë©´ ì¶œë ¥
+void introGame(); // °ÔÀÓ ½ÃÀÛÈ­¸é ÇÔ¼ö
+int keyControl(); // ¹æÇâÅ°·Î ¸Ş´º ¼±ÅÃ ÇÔ¼ö
+int menuChoice(); // ½ÃÀÛÈ­¸é ¸Ş´º ¼±ÅÃ ÇÔ¼ö
+void gameImage(); // °ÔÀÓÈ­¸é ÀÌ¹ÌÁö Ãâ·Â ÇÔ¼ö
+void gameRule(); // °ÔÀÓ ·ê È­¸é ÇÔ¼ö
+void player(int x, int y); // ÄÄÇ»ÅÍ ÇÃ·¹ÀÌ¾î ÀÌ¹ÌÁö Ãâ·Â ÇÔ¼ö
+void bettingNumber(); // º£ÆÃ ¸Ş´º ¼±ÅÃ ÇÔ¼ö
+int bettingMenuChoice(); // º£ÆÃ ¸Ş´º ÀÌ¸§ Ãâ·Â ÇÔ¼ö
+void victoryPrint(); // ½Â¸® ½Ã È­¸é Ãâ·Â
+void defeatPrint();  // ÆĞ¹è ½Ã È­¸é Ãâ·Â
+void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2); //Ä«µå ±¸¼º ÇÔ¼ö
