@@ -1,0 +1,81 @@
+    // first check! 5카드 중 ace?
+    cout << endl;
+    for (i = 0; i < 5; i++)
+    {
+        int acerank = 0;
+        int currentCardRank = deck[i] % 13;
+        if (currentCardRank == acerank)
+        {
+            cout << "Got an ace!" << endl;
+        }
+    }
+
+    // 카드 5개 숫자 get!
+    int R[5]; // = {4, 7, 6, 3, 5}; // 카드 5개의 숫자
+    int S[5];
+    for (i = 0; i < 5; i++)
+    {
+        R[i] = deck[i] % 13;
+        S[i] = deck[i] / 13;
+    }
+
+    // 배열 R 정렬
+    bool swapped = false;
+    do
+    {
+        swapped = false;
+        for (int i = 0; i < 4; i++)
+        {
+            if (R[i] > R[i + 1])
+            {
+                int temp = R[i];
+                R[i] = R[i + 1];
+                R[i + 1] = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped == true);
+
+    // 정렬된 숫자,문양 출력
+    for (i = 0; i < 5; i++)
+    {
+        cout << Number[R[i]] << " of " << Pattern[S[i]] << "\n";
+    }
+
+    // straight 체크 :
+    if (R[1] == R[0] + 1 && R[2] == R[1] + 1 && R[3] == R[2] + 1 && R[4] == R[3] + 1)
+    {
+        cout << "straight!" << endl;
+    }
+    else
+    {
+        cout << "No straight" << endl;
+    }
+
+    // pair 체크
+    if (R[0] == R[1] || R[1] == R[2] || R[2] == R[3] || R[3] == R[4])
+    {
+        cout << "pair!" << endl;
+    }
+    else
+    {
+        cout << "No pair" << endl;
+    }
+
+    // flush 체크 (5카드 전부 같은 문양)
+    if (S[0] == S[1] && S[1] == S[2] && S[2] == S[3] && S[3] == S[4])
+    {
+        cout << "flush!" << endl;
+    }
+    else
+    {
+        cout << "No flush" << endl;
+    }
+
+    //straight flush 체크
+
+    //four card 체크
+
+    //full house 체크
+    system("pause");
+    return 0;
