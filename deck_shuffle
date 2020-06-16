@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <ctime>
+
+using namespace std;
+
+int main()
+{
+    srand(time(0));
+    int deck[52];
+    int i;
+    string Pattern[4] = { "clover", "heart", "diamond", "spade" };
+    string Number[13] = { "ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king" };
+
+    // 새 덱 생성
+    for (i = 0; i < 52; i++)
+    {
+        deck[i] = i;
+    }
+
+    // 덱 셔플
+    for (i = 0; i < 52; i++)
+    {
+        int j = rand() % 52;
+        int temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+
+
+    // 모든 카드 출력
+    for (i = 0; i < 52; i++)
+    {
+        int suitnumber = deck[i] / 13; // 0 - 3
+        int rank = deck[i] % 13;
+        cout << Number[rank] << " " << Pattern[suitnumber] << "\n";
+    }
