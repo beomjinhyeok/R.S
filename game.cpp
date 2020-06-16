@@ -1,89 +1,96 @@
 #include "poker_header.h"
 
+int survivor = 5;
+card Deck[52];
 
-card drawCard()
+
+//void endGame()
+//{
+//	checkCard(); //임시 족보 비교 함수
+//
+//
+//}
+//
+//void resetGame()
+//{
+//
+//}
+
+//void checkOutCom(player member[])
+//{
+//	for (int i = 0; i < survivor; i++)
+//	{
+//		if (member[i].getMoney == 0)
+//		{
+//
+//		}
+//	}
+//}
+
+void choiceBet(player member[], int& gambler, int leader, int& totalBet)
 {
-	card temp;
-	temp = drawCard();
-
-	return drawCard();
-}
-
-void endGame()
-{
-	checkCard(); //임시 족보 비교 함수
+	int nowBet = leader - 1, betMoney = 0;
 
 
-}
-
-void resetGame()
-{
-
-}
-
-void checkOutCom(player member[])
-{
-	for (int i = 0; i < survivor; i++)
+	for (int i = 0; i < gambler; i++) // 여기 고쳐야함
 	{
-		if (member[i].getMoney == 0)
-		{
+		nowBet = (nowBet + 1)%survivor;
 
-		}
-	}
-}
-
-void choiceBet(player member[], int& gambler, int leader, int &totalBet)
-{
-	int nowBet = leader-1, betMoney=0;
-
-	int cantChoice;
-
-	for (int i = 0; i < gambler; i++)
-	{	
-		nowBet = gambler % (nowBet + 1);
-		
 		while (member[nowBet].nowPlay() == false) //다음 플레이어가 이번판 다이를 쳤을 경우.
 		{
-			nowBet = gambler % (nowBet + 1);
+			nowBet = (nowBet + 1)%survivor;
 		}
-
+		cout << "현재 차례 : " << nowBet << endl;
 		if (i == 0) //첫 턴 leader만 배팅 다름.
 		{
-			betMoney = member[nowBet].leaderBet(totalBet,gambler);
+			betMoney = member[nowBet].leaderBet(totalBet, gambler);
 			while (betMoney == 0) //만약 리더가 다이한 경우
 			{
-				if (gambler==1) // 한 명빼고 gambler가 없을 경우
+				if (gambler == 1) // 한 명빼고 gambler가 없을 경우
 					break;
-				nowBet = gambler % (nowBet + 1);
-				betMoney = member[nowBet].leaderBet(totalBet,gambler);
+				nowBet = (nowBet + 1)%survivor;
+				while (member[nowBet].nowPlay() == false) //다음 플레이어가 이번판 다이를 쳤을 경우.
+				{
+					nowBet = (nowBet + 1) % survivor;
+				}
+				cout << "현재 차례 : " << nowBet << endl;
+				betMoney = member[nowBet].leaderBet(totalBet, gambler);
 			}
 		}
 		else
 		{
-			if (member[nowBet].canBet == true) // 돈 낼 능력이 있는가 판단
+			if (member[nowBet].canBet(betMoney) == true) // 돈 낼 능력이 있는가 판단
 				choiceFollower(member[nowBet], betMoney, totalBet, gambler, i);
 			else
-				cant_Bet(member[nowBet], betMoney, gambler,totalBet);
+				cant_Bet(member[nowBet], betMoney, gambler, totalBet);
 		}
+		cout << "전체 배팅 : " << totalBet << endl << "현재 배팅 : " << betMoney << endl;
 	}
 }
 
-void choiceFollower(player& follower,int& betMoney,int& totalBet,int& gambler, int &bet)
+void choiceFollower(player & follower, int& betMoney, int& totalBet, int& gambler, int& bet)
 {
+	cout << "팔로우 배팅 : (1: 콜, 2: 다이, 3: 더블, 4: 하프) \n";
 	int choice;
 	cin >> choice; // 인터페이스에서는 선택
 
 	switch (choice)
 	{
 	case 1: //콜
-		follower.payMoney(betMoney,totalBet);
+		follower.payMoney(betMoney, totalBet);
 		break;
 	case 2: //다이
 		follower.playerDie(gambler);
 		break;
 	case 3: // 더블, 배팅 금액 없는 경우 생각
 		bet = 0; // 더블 다음 사람부터 다시 팔로워처럼 배팅 선택
-		follower.doubleBet(betMoney,totalBet);
+		if(betMoney*2<=follower.getMoney())
+			follower.doubleBet(betMoney, totalBet);
+		else
+		{
+			cout << "금액이 충분하지 않습니다.\n";
+			choiceFollower(follower, betMoney, totalBet, gambler, bet);
+		}
 		break;
 	case 4: // 하프
 		if (betMoney > totalBet / 2)
@@ -91,7 +98,7 @@ void choiceFollower(player& follower,int& betMoney,int& totalBet,int& gambler, i
 			cout << "하프가 배팅 금액보다 적습니다.\n";
 			choiceFollower(follower, betMoney, totalBet, gambler, bet);
 		}
-		else if (follower.getMoney < totalBet/2)
+		else if (follower.getMoney() < totalBet / 2)
 		{
 			cout << "현재 가진 돈이 판돈의 절반이 되지 않습니다.\n";
 			choiceFollower(follower, betMoney, totalBet, gambler, bet);
@@ -104,14 +111,16 @@ void choiceFollower(player& follower,int& betMoney,int& totalBet,int& gambler, i
 		break;
 	case 5: //All in
 		bet = 0; // 올인 다음 사람부터 다시 팔로워처럼 배팅 선택
-		follower.allMoney(betMoney,totalBet);
+		follower.allMoney(betMoney, totalBet);
 	}
+	
 }
 
 
 
-void cant_Bet(player& follwer, int& betMoney,int &gambler,int & totalBet)
+void cant_Bet(player & follwer, int& betMoney, int& gambler, int& totalBet)
 {
+	cout << "배팅 불가능 배팅 : (1. 올인, 2. 다이)\n";
 	int choice;
 	cin >> choice;
 
@@ -132,7 +141,7 @@ card drawCard()
 	return Deck[top--];
 }
 
-void obliBet(player member[],int &totalBet) // 의무 배팅
+void obliBet(player member[], int& totalBet) // 의무 배팅
 {
 	int obli = 3;
 
@@ -140,16 +149,16 @@ void obliBet(player member[],int &totalBet) // 의무 배팅
 	{
 		member[i].payMoney(obli, totalBet);
 		member[i].showMoney();
-		
+
 	}
-	cout << totalBet << endl;
+	cout << "전체 배팅 : " << totalBet << endl;
 }
 
 
 
-int choiceLeader(player member[],const int gambler) // 손봐야함
+int choiceLeader(player member[], const int gambler) // 손봐야함
 {
-	int temp = member[0].getMoney(), leader=0;
+	int temp = member[0].getMoney(), leader = 0;
 
 	for (int i = 1; i < gambler; i++)
 	{
@@ -159,25 +168,30 @@ int choiceLeader(player member[],const int gambler) // 손봐야함
 			leader = i;
 		}
 	}
+	if (leader == survivor)
+		leader = 0;
+
 	return leader;
 }
 
 
-void playGame(player member[],player& dealer) // 게임 진행
+void playGame(player member[], player & dealer) // 게임 진행
 {
 	int totalBet = 0, leader;
-	int gambler=survivor;
-	obliBet(member,totalBet);
+	int gambler = survivor;
+	obliBet(member, totalBet);
 
 	for (int i = 0; i < gambler; i++) // 2장씩 배팅
 	{
-		member[i].takeCard;
-		member[i].takeCard;
+		cout << i << "플레이어 카드 분배\n";
+		member[i].takeCard();
+		member[i].takeCard();
 	}
 
-	for(int i =0; i<3; i++)
-		dealer.takeCard;
-	
+	for (int i = 0; i < 3; i++)
+		dealer.takeCard();
+	cout << "딜러 카드 분배\n";
+
 	leader = choiceLeader(member, gambler); // 리더는 한 번만 정하면 다음부터는 오른쪽 사람이 리더
 
 	for (int i = 0; i < 3; i++)
@@ -186,11 +200,11 @@ void playGame(player member[],player& dealer) // 게임 진행
 		if (gambler == 1)
 			break;
 		if (i != 2) {
-			dealer.takeCard;
+			dealer.takeCard();
 			do
 			{
 				leader = gambler % (leader + 1);
-			} while (member[leader].checkPlayer == false);
+			} while (member[leader].checkPlayer() == false);
 		}
 	}
 
@@ -198,4 +212,3 @@ void playGame(player member[],player& dealer) // 게임 진행
 
 
 //진행 상황 - 의무 배팅 구현, 카드 2장 주기 구현, 딜러 카드 3장 구현, 리더 선택 구현, 리더 배팅 구현, 팔로워 배팅 구현(예외사항 적용중)
-

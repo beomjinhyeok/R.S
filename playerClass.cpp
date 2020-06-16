@@ -1,5 +1,14 @@
 #include "poker_header.h"
 
+player::player() : used(0), gameMoney(50), play(true), die(false)
+{}
+
+ostream& operator<< (ostream& a, const card& thiscard) // 삭제 고려
+{
+	a << thiscard.pat << thiscard.cardNumber;
+
+	return a;
+}
 
 void player::showMoney() // 남은 플레이어 돈 확인
 {
@@ -31,6 +40,7 @@ void player::playerDie(int& gambler)
 
 void player::getCard(card newCard1, card newCard2)
 {
+	cout << "카드 2장 드로우\n"; // 임시
 	myCard[0] = newCard1;
 	myCard[1] = newCard2;
 }
@@ -69,12 +79,14 @@ int player::inputBet(int &totalBet) // 베팅 범위 정해야 함.
 
 int player::leaderBet(int &totalMoney,int& gambler)
 {
+	cout << "리더 배팅 (1: 배팅, 2: 다이)\n";//임시
 	int choice, betMoney;
 	cin >> choice;
 
 	switch (choice)
 	{
 	case 1:
+		cout << "배팅 금액 : "; //임시
 		betMoney = inputBet(totalMoney);
 		return betMoney;
 	case 2:
