@@ -45,6 +45,11 @@ void player::getCard(card newCard1, card newCard2)
 	myCard[1] = newCard2;
 }
 
+void player::payBet(int betMoney)
+{
+	gameMoney = gameMoney - betMoney;
+}
+
 bool player::checkPlayer()
 {
 	if (play == true)
@@ -55,6 +60,7 @@ bool player::checkPlayer()
 
 void player::takeCard()
 {
+	cout << "카드 받음\n"; //임시
 	myCard[used++] = drawCard();
 }
 
@@ -72,7 +78,7 @@ int player::inputBet(int &totalBet) // 베팅 범위 정해야 함.
 	} while (betMoney>gameMoney || betMoney <= 0);
 
 	totalBet = totalBet + betMoney;
-	gameMoney = gameMoney - betMoney;
+	//gameMoney = gameMoney - betMoney; // 고려
 
 	return betMoney;
 }
@@ -98,14 +104,15 @@ int player::leaderBet(int &totalMoney,int& gambler)
 void player::doubleBet(int& betMoney,int& totalBet)
 {
 	betMoney = betMoney * 2;
-	gameMoney = gameMoney - betMoney;
+	//gameMoney = gameMoney - betMoney; //고려
 	totalBet = totalBet + betMoney;
 }
 
 void player::allMoney(int& betMoney, int& totalBet)
 {
+	totalBet = totalBet - betMoney;
 	betMoney = gameMoney;
-	gameMoney = 0;
+	gameMoney = 0; //고려
 	totalBet = totalBet + betMoney;
 	play = false;
 }
@@ -120,15 +127,16 @@ bool player::canBet(int betMoney) //배팅할 능력이 있는지 판단
 
 void player::halfBet(int& betMoney, int& totalBet)
 {
+	totalBet = totalBet - betMoney;
 	betMoney = totalBet / 2;
-	gameMoney = gameMoney - betMoney;
+	//gameMoney = gameMoney - betMoney; //고려
 	totalBet = betMoney;
 }
 
 void player::dieAllMoney(int& totalBet)
 {
 	totalBet = totalBet + gameMoney;
-	gameMoney = 0;
+	gameMoney = 0; //고려
 	play = false;
 }
 

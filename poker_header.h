@@ -41,7 +41,8 @@ public:
 	void dieAllMoney(int& totalMoney);
 	bool nowPlay();
 	void checkSurvivor();
-	
+	void payBet(int betMoney);
+
 protected:
 	int used; // 받은 카드 갯수
 	int gameMoney;
