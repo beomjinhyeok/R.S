@@ -1,0 +1,200 @@
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <ctime>
+
+using namespace std;
+
+int main()
+{
+    srand(time(0));
+    int deck[52];
+    int i;
+    string Pattern[4] = { "clover", "heart", "diamond", "spade" };
+    string Number[13] = { "ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king" };
+
+    // 새 덱 생성
+    for (i = 0; i < 52; i++)
+    {
+        deck[i] = i;
+    }
+
+    // 덱 셔플
+    for (i = 0; i < 52; i++)
+    {
+        int j = rand() % 52;
+        int temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+
+    // first check! 5카드 중 ace?
+    cout << endl;
+    for (i = 0; i < 5; i++)
+    {
+        int acerank = 0;
+        int currentCardRank = deck[i] % 13;
+        if (currentCardRank == acerank)
+        {
+            cout << "Got an ace!" << endl;
+        }
+    }
+
+    // 카드 5개 숫자 get!
+    int R[5]; // = {4, 7, 6, 3, 5}; // 카드 5개의 숫자
+    int S[5];
+    for (i = 0; i < 5; i++)
+    {
+        R[i] = deck[i] % 13;
+        S[i] = deck[i] / 13;
+    }
+
+    // 배열 R 정렬
+    bool swapped = false;
+    do
+    {
+        // 1 pass of the bubble sort
+        swapped = false;
+        for (int i = 0; i < 4; i++)
+        {
+            if (R[i] > R[i + 1])
+            {
+                int temp = R[i];
+                R[i] = R[i + 1];
+                R[i + 1] = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped == true);
+
+    // 정렬된 숫자,문양 출력
+    for (i = 0; i < 5; i++)
+    {
+        cout << Number[R[i]] << " " << Pattern[S[i]] << "\n";
+    }
+
+    //High_card = 1, // 보드와 무관한 카드 숫자가 높은 사람이 이김
+    //      //카드 숫자가 모두 똑같으면 비김 // 1
+    ////문양따라가는걸로 순위 매김
+    //One_pair, // 같은숫자 2개 1쌍 // 2
+    //Two_pair, // 같은 숫자 2개 2쌍 // 3
+    //Triple, //같은숫자 3개 // 4
+    //Straight, //연속된 숫자 5개 // 5
+    //Flush, //같은문양 5개 // 6
+    //Full_house, // 트리플 + 원페어 // 7
+    //Four_card, // 같은숫자 4개 // 8
+    //Straight_flush //같은문양, 숫자 오름차순 5개 // 9
+
+    // 처음에 Pedigree를  high_card로 초기화
+    string  Pedigree = "high_card";
+
+    // 5장의 카드 족보 검사
+
+    // straight 체크
+    if (R[1] == R[0] + 1 && R[2] == R[1] + 1 && R[3] == R[2] + 1 && R[4] == R[3] + 1)
+    {
+        cout << "straight!" << endl;
+        Pedigree = "straight";
+    }
+    else
+    {
+        cout << "No straight" << endl;
+    }
+
+    // pair 체크
+    if (R[0] == R[1] || R[1] == R[2] || R[2] == R[3] || R[3] == R[4])
+    {
+        cout << "pair!" << endl;
+
+        //one pair 검사
+        if (R[0] == R[1] && R[1] != R[2] && R[2] != R[3] && R[3] != R[4])
+        {
+            Pedigree = "one_pair";
+        }
+        else if (R[1] == R[2] && R[0] != R[1] && R[2] != R[3] && R[3] != R[4])
+        {
+            Pedigree = "one_pair";
+        }
+        else if (R[2] == R[3] && R[0] != R[1] && R[1] != R[2] && R[3] != R[4])
+        {
+            Pedigree = "one_pair";
+        }
+        else if (R[3] == R[4] && R[0] != R[1] && R[1] != R[2] && R[2] != R[3])
+        {
+            Pedigree = "one_pair";
+        }
+        // two pair  검사
+        else if ((R[0] == R[1]) && (R[2] == R[3]) && (R[0] != R[2] != R[4]))
+        {
+            Pedigree = "two_pair";
+        }
+        else if ((R[1] == R[2]) && (R[3] == R[4]) && (R[0] != R[1] != R[3]))
+        {
+            Pedigree = "two_pair";
+        }
+        else
+        {
+            cout << "No pair" << endl;
+        }
+    }
+
+    //triple 체크
+    if ((R[0] == R[1] == R[2]) || (R[1] == R[2] == R[3]) || (R[2] == R[3] == R[4]))
+    {
+        cout << "Triple!" << endl;
+        Pedigree = "Triple";
+    }
+    else
+    {
+        cout << "No triple!" << endl;
+    }
+
+    //full house 체크
+    if (((R[0] == R[1] == R[2]) && (R[3] == R[4]) && (R[0] != R[3])) || ((R[2] == R[3] == R[4]) && (R[0] == R[1]) && (R[2] != R[0])))
+    {
+        cout << "Full house!" << endl;
+        Pedigree = "Full_house";
+    }
+    else
+    {
+        cout << "No full house" << endl;
+    }
+
+    // flush 체크 (5카드 전부 같은 문양)
+    if (S[0] == S[1] && S[1] == S[2] && S[2] == S[3] && S[3] == S[4])
+    {
+        cout << "flush!" << endl;
+        Pedigree = "flush";
+    }
+    else
+    {
+        cout << "No flush" << endl;
+    }
+
+    //straight flush 체크
+    if (R[1] == R[0] + 1 && R[2] == R[1] + 1 && R[3] == R[2] + 1 && R[4] == R[3] + 1)
+        if (S[0] == S[1] && S[1] == S[2] && S[2] == S[3] && S[3] == S[4])
+        {
+            cout << "straight flush!" << endl;
+            Pedigree = "straight_flush";
+        }
+        else
+        {
+            cout << "No straight flush" << endl;
+        }
+
+    //four card 체크
+    if ((R[0] == R[1] == R[2] == R[3]) || (R[1] == R[2] == R[3] == R[4]))
+    {
+        cout << "four card!" << endl;
+        Pedigree = "four_card";
+    }
+    else
+    {
+        cout << "No four card" << endl;
+    }
+
+    cout << Pedigree << endl;
+    system("pause");
+    return 0;
+}
