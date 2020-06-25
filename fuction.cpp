@@ -36,6 +36,7 @@ void introGame()
 	gotoxy(45, 7); cout << "           □         □□□□□         □         □□□□□       □□□  ";
 	gotoxy(45, 8); cout << "           □         □               □  □       □      □             □";
 	gotoxy(45, 9); cout << "           □         □□□□□     □      □     □      □     □□□□□";
+	gotoxy(45, 10); cout << "																			 ";
 	gotoxy(45, 12); cout << " □      □     □□□□□     □             □□□□       □□□□□     □      □";
 	gotoxy(45, 13); cout << " □      □     □      □     □             □     □      □             □□  □□";
 	gotoxy(45, 14); cout << " □□□□□     □      □     □             □      □     □□□□□     □  □  □";
@@ -289,12 +290,13 @@ void defeatPrint()
 
 void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 {
-	int shape[5] = { 0,1,2,3,4 };
-	int num1ber[14] = { 0,2,3,4,5,6,7,8,9,10,11,12,13,1 };
+	int shape[5] = { 0,1,2,3,4 }; //null, spade, diamond, heart, cluber
+	int num1ber[14] = { 0,2,3,4,5,6,7,8,9,10,11,12,13,1 }; //null, 2~10, jack, queen, king, ace
 	int x = 28, y = 29;
 	int i, j, k, v = 1, hide = 0;		//hide 0 숨김, 1 표시
 	int get = 3;
 	int num1 = 0, num2 = 0;
+	setColor(GREEN, WHITE);
 	for (k = 0; k < 2; k++)
 	{
 		if (k == 0) // 현재 뒷면인 상태
@@ -305,7 +307,7 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 				for (j = 0;j < 25;j++)
 				{
 					Sleep(10);
-					gotoxy(x - num1, 8); printf("┏━━━━┓");
+					gotoxy(x - num1, 8); printf("┏--------┓");
 					gotoxy(x - num1, 9); printf("┃?       ┃");
 					gotoxy(x - num1, 10);printf("┃        ┃");
 					gotoxy(x - num1, 11);printf("┃   ??   ┃");
@@ -331,8 +333,8 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 					{
 						gotoxy(10 - num2, 15 - num1);printf("          ");
 					}
-					gotoxy(10 - num2, 8 - num1);printf("┏━━━┓");
-					gotoxy(10 - num2, 9 - num1);printf("┃?     ┃");
+					gotoxy(10 - num2, 8 - num1); printf("┏━━━┓");
+					gotoxy(10 - num2, 9 - num1); printf("┃?     ┃");
 					gotoxy(10 - num2, 10 - num1);printf("┃      ┃");
 					gotoxy(10 - num2, 11 - num1);printf("┃   ?  ┃");
 					gotoxy(10 - num2, 12 - num1);printf("┃      ┃");
@@ -352,7 +354,7 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 			system("cls");
 			gameImage();
 		}
-		else
+		else // 앞면인 상태
 		{
 			gotoxy(5, 8); printf("computer");		//컴퓨터와 사용자를 표시.
 			gotoxy(5, 14); printf("Y  o  u");
@@ -473,4 +475,173 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 			}
 		}
 	}
+}
+
+void result_Dack(int size, int count, int re, int* number, int* pattern)
+{
+	int i, jump = 0;			//jump = 카드값 위치 바꾸기
+
+	if (count == 0) {
+		for (i = 1; i <= size; i++) {
+			white();
+			gotoxy(14 + jump, 4);printf("┏━━━┓");
+			gotoxy(14 + jump, 5);printf("┃      ┃");
+			gotoxy(14 + jump, 6);printf("┃      ┃");
+			gotoxy(14 + jump, 7);printf("┃      ┃");
+			gotoxy(14 + jump, 8);printf("┃      ┃");
+			gotoxy(14 + jump, 9);printf("┃      ┃");
+			gotoxy(14 + jump, 10);printf("┗━━━┛");
+			if (pattern[i - re] == 4) {
+				white();
+				gotoxy(16 + jump, 5);printf("♠");
+				gotoxy(20 + jump, 9);printf("♠");
+			}
+			else if (pattern[i - re] == 2) {
+				red();
+				gotoxy(16 + jump, 5);printf("♥");
+				gotoxy(20 + jump, 9);printf("♥");
+			}
+			else if (pattern[i - re] == 1) {
+				white();
+				gotoxy(16 + jump, 5);printf("♣");
+				gotoxy(20 + jump, 9);printf("♣");
+			}
+			else if (pattern[i - re] == 3) {
+				red();
+				gotoxy(16 + jump, 5);printf("◆");
+				gotoxy(20 + jump, 9);printf("◆");
+			}
+			if (number[i - re] == 1) {
+				gotoxy(19 + jump, 7);printf("A");
+			}
+			else if (number[i - re] == 11) {
+				gotoxy(19 + jump, 7);printf("J");
+			}
+			else if (number[i - re] == 12) {
+				gotoxy(19 + jump, 7);printf("Q");
+			}
+			else if (number[i - re] == 13) {
+				gotoxy(19 + jump, 7);printf("K");
+			}
+			else {
+				gotoxy(18 + jump, 7);printf("%2d", number[i - re]);
+			}
+			jump += 10;
+		}
+	}
+	if (count == 1)
+	{
+		for (i = 1; i <= size; i++) {
+			white();
+			gotoxy(14 + jump, 12);printf("┏━━━┓");
+			gotoxy(14 + jump, 13);printf("┃      ┃");
+			gotoxy(14 + jump, 14);printf("┃      ┃");
+			gotoxy(14 + jump, 15);printf("┃      ┃");
+			gotoxy(14 + jump, 16);printf("┃      ┃");
+			gotoxy(14 + jump, 17);printf("┃      ┃");
+			gotoxy(14 + jump, 18);printf("┗━━━┛");
+			if (pattern[i - re] == 4) {
+				white();
+				gotoxy(16 + jump, 13);printf("♠");
+				gotoxy(20 + jump, 17);printf("♠");
+			}
+			else if (pattern[i - re] == 2) {
+				red();
+				gotoxy(16 + jump, 13);printf("♥");
+				gotoxy(20 + jump, 17);printf("♥");
+			}
+			else if (pattern[i - re] == 1) {
+				white();
+				gotoxy(16 + jump, 13);printf("♣");
+				gotoxy(20 + jump, 17);printf("♣");
+			}
+			else if (pattern[i - re] == 3) {
+				red();
+				gotoxy(16 + jump, 13);printf("◆");
+				gotoxy(20 + jump, 17);printf("◆");
+			}
+			if (number[i - re] == 1) {
+				gotoxy(19 + jump, 15);printf("A");
+			}
+			else if (number[i - re] == 11) {
+				gotoxy(19 + jump, 15);printf("J");
+			}
+			else if (number[i - re] == 12) {
+				gotoxy(19 + jump, 15);printf("Q");
+			}
+			else if (number[i - re] == 13) {
+				gotoxy(19 + jump, 15);printf("K");
+			}
+			else {
+				gotoxy(18 + jump, 15);printf("%2d", number[i - re]);
+			}
+			jump += 10;
+		}
+	}
+	if (count == 0)					//결과 값 위치 지정
+		gotoxy(68, 4);
+	else if (count == 1)
+		gotoxy(68, 6);
+}
+
+void print(int result, int i) //
+{
+	white();
+
+	switch (result)
+	{
+	case 2:
+		result_Dack(3, i, 0, results, patterns);
+		white(); printf("하이카드\n");
+		break;
+	case 3:
+		result_Dack(5, i, 0, results, patterns);
+		white(); printf("원페어\n");
+		break;
+	case 4:
+		result_Dack(5, i, 0, results, patterns);
+		white(); printf("투페어\n");
+		break;
+	case 5:
+		result_Dack(5, i, 0, results, patterns);
+		white(); printf("쓰리카드\n");
+		break;
+	case 6:
+		result_Dack(5, i, 0, results, patterns);
+		white(); printf("스트레이트\n");
+		break;
+	case 7:
+		result_Dack(5, i, 0, results, patterns);
+		white(); printf("플러쉬\n");
+		break;
+	case 8:
+		result_Dack(4, i, 0, results, patterns);
+		white(); printf("풀하우스\n");
+		break;
+	case 9:
+		result_Dack(5, i, 0, results, patterns);
+		white(); printf("포카드\n");
+		break;
+	case 10:
+		result_Dack(5, i, 0, results, patterns);
+		white(); printf("스트레이트 플러시\n");
+		break;
+	case 11:
+		result_Dack(5, i, 0, results, patterns);
+		white(); printf("로얄 스트레이트 플러시\n");
+		break;
+	}
+}
+
+void red()
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
+}
+void white()
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+}
+void blue()
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE);
 }
