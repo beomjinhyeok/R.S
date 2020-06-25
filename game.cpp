@@ -56,6 +56,7 @@ void choiceBet(player member[], int& gambler, int leader, int& totalBet)
 				cout << "현재 차례 : " << nowBet << endl;
 				betMoney = member[nowBet].leaderBet(totalBet, gambler);
 			}
+			
 		}
 		else
 		{
@@ -64,8 +65,18 @@ void choiceBet(player member[], int& gambler, int leader, int& totalBet)
 			else
 				cant_Bet(member[nowBet], betMoney, gambler, totalBet);
 		}
-		cout << "전체 배팅 : " << totalBet << endl << "현재 배팅 : " << betMoney << endl;
+		cout << "전체 배팅 금액: " << totalBet << endl << "현재 배팅 : " << betMoney << endl;
 	}
+
+	for (int j = 0; j < survivor; j++)
+	{
+		if (member[j].nowPlay() == true)
+		{
+			member[j].payBet(betMoney);
+		}
+	}
+
+	betMoney = 0;
 }
 
 void choiceFollower(player & follower, int& betMoney, int& totalBet, int& gambler, int& bet)
@@ -77,15 +88,26 @@ void choiceFollower(player & follower, int& betMoney, int& totalBet, int& gamble
 	switch (choice)
 	{
 	case 1: //콜
+		if (betMoney > follower.getMoney())
+		{
+			cout << "금액이 충분하지 않습니다.\n";
+			choiceFollower(follower, betMoney, totalBet, gambler, bet);
+		}
+		else
+			cout << "---------------------콜---------------------\n";
 		follower.payMoney(betMoney, totalBet);
 		break;
 	case 2: //다이
 		follower.playerDie(gambler);
 		break;
 	case 3: // 더블, 배팅 금액 없는 경우 생각
-		bet = 0; // 더블 다음 사람부터 다시 팔로워처럼 배팅 선택
-		if(betMoney*2<=follower.getMoney())
+		
+		if (betMoney * 2 <= follower.getMoney())
+		{
+			bet = 0; // 더블 다음 사람부터 다시 팔로워처럼 배팅 선택
+			cout << "---------------------더블---------------------\n";
 			follower.doubleBet(betMoney, totalBet);
+		}
 		else
 		{
 			cout << "금액이 충분하지 않습니다.\n";
@@ -105,18 +127,18 @@ void choiceFollower(player & follower, int& betMoney, int& totalBet, int& gamble
 		}
 		else
 		{
+			cout << "---------------------하프---------------------\n";
 			follower.halfBet(betMoney, totalBet);
 			bet = 0;
 		}
 		break;
 	case 5: //All in
 		bet = 0; // 올인 다음 사람부터 다시 팔로워처럼 배팅 선택
+		cout << "---------------------올 인---------------------\n";
 		follower.allMoney(betMoney, totalBet);
 	}
 	
 }
-
-
 
 void cant_Bet(player & follwer, int& betMoney, int& gambler, int& totalBet)
 {
@@ -127,9 +149,11 @@ void cant_Bet(player & follwer, int& betMoney, int& gambler, int& totalBet)
 	switch (choice)
 	{
 	case 1: // 올인 
+		cout << "---------------------올 인---------------------\n";
 		follwer.dieAllMoney(totalBet);
 		break;
 	case 2: // 다이
+		cout << "---------------------다이---------------------\n";
 		follwer.playerDie(gambler);
 	}
 }
@@ -151,7 +175,7 @@ void obliBet(player member[], int& totalBet) // 의무 배팅
 		member[i].showMoney();
 
 	}
-	cout << "전체 배팅 : " << totalBet << endl;
+	cout << "전체 배팅 금액 : " << totalBet << endl;
 }
 
 
@@ -188,14 +212,17 @@ void playGame(player member[], player & dealer) // 게임 진행
 		member[i].takeCard();
 	}
 
+	cout << "딜러 카드 분배\n";
+
 	for (int i = 0; i < 3; i++)
 		dealer.takeCard();
-	cout << "딜러 카드 분배\n";
+
 
 	leader = choiceLeader(member, gambler); // 리더는 한 번만 정하면 다음부터는 오른쪽 사람이 리더
 
 	for (int i = 0; i < 3; i++)
 	{
+		cout << i << "번 배팅\n";
 		choiceBet(member, gambler, leader, totalBet);
 		if (gambler == 1)
 			break;
@@ -203,7 +230,8 @@ void playGame(player member[], player & dealer) // 게임 진행
 			dealer.takeCard();
 			do
 			{
-				leader = gambler % (leader + 1);
+				leader = (leader + 1)%survivor;
+				
 			} while (member[leader].checkPlayer() == false);
 		}
 	}
