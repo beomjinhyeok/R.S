@@ -18,7 +18,7 @@ void init()
 	ConsoleCursor.dwSize = 1;
 	SetConsoleCursorInfo(consoleHandle, &ConsoleCursor);
 	system("color F5");
-	//setColor(WHITE, GREEN); // 게임화면 만들때 사용..
+	//setColor(WHITE, GREEN); // 게임화면 만들때 사용
 }
 
 void gotoxy(int x, int y)
