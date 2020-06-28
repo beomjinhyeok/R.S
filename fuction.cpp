@@ -271,7 +271,7 @@ void bettingNumber()
 void victoryPrint()
 {
 	gotoxy(80, 17); cout << "------------------------";
-	gotoxy(80, 18); cout << "|                       |-";
+	gotoxy(80, 18); cout << "|                       |";
 	gotoxy(80, 19); cout << "|      승리!!!!!!!      |";
 	gotoxy(80, 20); cout << "|                       |";
 	gotoxy(80, 21); cout << "------------------------";
@@ -281,7 +281,7 @@ void victoryPrint()
 void defeatPrint()
 {
 	gotoxy(80, 17); cout << "------------------------";
-	gotoxy(80, 18); cout << "|                       |-";
+	gotoxy(80, 18); cout << "|                       |";
 	gotoxy(80, 19); cout << "|      패배!!!!!!!      |";
 	gotoxy(80, 20); cout << "|                       |";
 	gotoxy(80, 21); cout << "------------------------";
@@ -356,8 +356,6 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 		}
 		else // 앞면인 상태
 		{
-			gotoxy(5, 8); printf("computer");		//컴퓨터와 사용자를 표시.
-			gotoxy(5, 14); printf("Y  o  u");
 			num1 = 0;
 			num2 = 0;
 			j = 1;
@@ -380,39 +378,39 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 					gotoxy(4 + num1, 6);printf("┃     ?┃");
 					gotoxy(4 + num1, 7);printf("┗━━━┛");
 					//					if(hide != 1){
-					if (shape[shape_rand[j]] == 4) {
+					if (shape[shape_rand[j]] == 1) {
 						//white();
 						gotoxy(6 + num1, 2);printf("♠");
 						gotoxy(10 + num1, 6);printf("♠");
 					}
 					else if (shape[shape_rand[j]] == 2) {
 						//red();
+						gotoxy(6 + num1, 2);printf("◆");
+						gotoxy(10 + num1, 6);printf("◆");
+					}
+					else if (shape[shape_rand[j]] == 3) {
+						//red();
 						gotoxy(6 + num1, 2);printf("♥");
 						gotoxy(10 + num1, 6);printf("♥");
 					}
-					else if (shape[shape_rand[j]] == 1) {
+					else if (shape[shape_rand[j]] == 4) {
 						//white();
 						gotoxy(6 + num1, 2);printf("♣");
 						gotoxy(10 + num1, 6);printf("♣");
 					}
-					else if (shape[shape_rand[j]] == 3) {
-						//red();
-						gotoxy(6 + num1, 2);printf("◆");
-						gotoxy(10 + num1, 6);printf("◆");
-					}
-					if (num1ber[num1_rand[j]] == 1) {
+					if (num1ber[num1_rand[j]] == 13) {
 						gotoxy(9 + num1, 4);printf("A");
 					}
-					else if (num1ber[num1_rand[j]] == 11) {
+					else if (num1ber[num1_rand[j]] == 10) {
 						gotoxy(9 + num1, 4);printf("J");
 					}
-					else if (num1ber[num1_rand[j]] == 12) {
+					else if (num1ber[num1_rand[j]] == 11) {
 						gotoxy(9 + num1, 4);printf("Q");
 					}
-					else if (num1ber[num1_rand[j]] == 13) {
+					else if (num1ber[num1_rand[j]] == 12) {
 						gotoxy(9 + num1, 4);printf("K");
 					}
-					else if (num1ber[num1_rand[j]] == num1_rand[j]) {
+					else if (num1ber[num1_rand[j]] == num1_rand[j]+1) {
 						gotoxy(8 + num1, 4);printf("%2d", num1_rand[j]);
 					}
 					//					}
@@ -434,39 +432,39 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 					gotoxy(4 + num2, 19);printf("┃      ┃");
 					gotoxy(4 + num2, 20);printf("┃      ┃");
 					gotoxy(4 + num2, 21);printf("┗━━━┛");
-					if (shape[shape_rand2[v]] == 4) {
+					if (shape[shape_rand2[v]] == 1) {
 						//white();
 						gotoxy(6 + num2, 16);printf("♠");
 						gotoxy(10 + num2, 20);printf("♠");
-					}
+					}					
 					else if (shape[shape_rand2[v]] == 2) {
+						//red();
+						gotoxy(6 + num2, 16);printf("◆");
+						gotoxy(10 + num2, 20);printf("◆");
+					}					
+					else if (shape[shape_rand2[v]] == 3) {
 						//red();
 						gotoxy(6 + num2, 16);printf("♥");
 						gotoxy(10 + num2, 20);printf("♥");
 					}
-					else if (shape[shape_rand2[v]] == 1) {
+					else if (shape[shape_rand2[v]] == 4) {
 						//white();
 						gotoxy(6 + num2, 16);printf("♣");
 						gotoxy(10 + num2, 20);printf("♣");
 					}
-					else if (shape[shape_rand2[v]] == 3) {
-						//red();
-						gotoxy(6 + num2, 16);printf("◆");
-						gotoxy(10 + num2, 20);printf("◆");
-					}
-					if (num1ber[num1_rand2[v]] == 1) {
+					if (num1ber[num1_rand2[v]] == 13) {
 						gotoxy(9 + num2, 18);printf("A");
 					}
-					else if (num1ber[num1_rand2[v]] == 11) {
+					else if (num1ber[num1_rand2[v]] == 10) {
 						gotoxy(9 + num2, 18);printf("J");
 					}
-					else if (num1ber[num1_rand2[v]] == 12) {
+					else if (num1ber[num1_rand2[v]] == 11) {
 						gotoxy(9 + num2, 18);printf("Q");
 					}
-					else if (num1ber[num1_rand2[v]] == 13) {
+					else if (num1ber[num1_rand2[v]] == 12) {
 						gotoxy(9 + num2, 18);printf("K");
 					}
-					else if (num1ber[num1_rand2[v]] == num1_rand2[v]) {
+					else if (num1ber[num1_rand2[v]] == num1_rand2[v]+1) {
 						gotoxy(8 + num2, 18);printf("%2d", num1_rand2[v]);
 					}
 					num2 += 12;
@@ -491,40 +489,40 @@ void result_Dack(int size, int count, int re, int* number, int* pattern)
 			gotoxy(14 + jump, 8);printf("┃      ┃");
 			gotoxy(14 + jump, 9);printf("┃      ┃");
 			gotoxy(14 + jump, 10);printf("┗━━━┛");
-			if (pattern[i - re] == 4) {
+			if (pattern[i - re] == 1) {
 				white();
 				gotoxy(16 + jump, 5);printf("♠");
 				gotoxy(20 + jump, 9);printf("♠");
 			}
 			else if (pattern[i - re] == 2) {
 				red();
+				gotoxy(16 + jump, 5);printf("◆");
+				gotoxy(20 + jump, 9);printf("◆");
+			}
+			else if (pattern[i - re] == 3) {
+				red();
 				gotoxy(16 + jump, 5);printf("♥");
 				gotoxy(20 + jump, 9);printf("♥");
 			}
-			else if (pattern[i - re] == 1) {
+			else if (pattern[i - re] == 4) {
 				white();
 				gotoxy(16 + jump, 5);printf("♣");
 				gotoxy(20 + jump, 9);printf("♣");
 			}
-			else if (pattern[i - re] == 3) {
-				red();
-				gotoxy(16 + jump, 5);printf("◆");
-				gotoxy(20 + jump, 9);printf("◆");
-			}
-			if (number[i - re] == 1) {
+			if (number[i - re] == 13) {
 				gotoxy(19 + jump, 7);printf("A");
 			}
-			else if (number[i - re] == 11) {
+			else if (number[i - re] == 10) {
 				gotoxy(19 + jump, 7);printf("J");
 			}
-			else if (number[i - re] == 12) {
+			else if (number[i - re] == 11) {
 				gotoxy(19 + jump, 7);printf("Q");
 			}
-			else if (number[i - re] == 13) {
+			else if (number[i - re] == 12) {
 				gotoxy(19 + jump, 7);printf("K");
 			}
 			else {
-				gotoxy(18 + jump, 7);printf("%2d", number[i - re]);
+				gotoxy(18 + jump, 7);printf("%2d", number[i - re]+1);
 			}
 			jump += 10;
 		}
@@ -540,40 +538,40 @@ void result_Dack(int size, int count, int re, int* number, int* pattern)
 			gotoxy(14 + jump, 16);printf("┃      ┃");
 			gotoxy(14 + jump, 17);printf("┃      ┃");
 			gotoxy(14 + jump, 18);printf("┗━━━┛");
-			if (pattern[i - re] == 4) {
+			if (pattern[i - re] == 1) {
 				white();
 				gotoxy(16 + jump, 13);printf("♠");
 				gotoxy(20 + jump, 17);printf("♠");
-			}
+			}			
 			else if (pattern[i - re] == 2) {
-				red();
-				gotoxy(16 + jump, 13);printf("♥");
-				gotoxy(20 + jump, 17);printf("♥");
-			}
-			else if (pattern[i - re] == 1) {
-				white();
-				gotoxy(16 + jump, 13);printf("♣");
-				gotoxy(20 + jump, 17);printf("♣");
-			}
-			else if (pattern[i - re] == 3) {
 				red();
 				gotoxy(16 + jump, 13);printf("◆");
 				gotoxy(20 + jump, 17);printf("◆");
 			}
-			if (number[i - re] == 1) {
+			else if (pattern[i - re] == 3) {
+				red();
+				gotoxy(16 + jump, 13);printf("♥");
+				gotoxy(20 + jump, 17);printf("♥");
+			}
+			else if (pattern[i - re] == 4) {
+				white();
+				gotoxy(16 + jump, 13);printf("♣");
+				gotoxy(20 + jump, 17);printf("♣");
+			}
+			if (number[i - re] == 13) {
 				gotoxy(19 + jump, 15);printf("A");
 			}
-			else if (number[i - re] == 11) {
+			else if (number[i - re] == 10) {
 				gotoxy(19 + jump, 15);printf("J");
 			}
-			else if (number[i - re] == 12) {
+			else if (number[i - re] == 11) {
 				gotoxy(19 + jump, 15);printf("Q");
 			}
-			else if (number[i - re] == 13) {
+			else if (number[i - re] == 12) {
 				gotoxy(19 + jump, 15);printf("K");
 			}
 			else {
-				gotoxy(18 + jump, 15);printf("%2d", number[i - re]);
+				gotoxy(18 + jump, 15);printf("%2d", number[i - re]+1);
 			}
 			jump += 10;
 		}
