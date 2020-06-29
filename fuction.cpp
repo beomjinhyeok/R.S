@@ -324,11 +324,10 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 	setColor(GREEN, WHITE);
 	int shape[5] = { 0,1,2,3,4 }; //null, spade, diamond, heart, cluber
 	int number[14] = { 0,2,3,4,5,6,7,8,9,10,11,12,13,1 }; //null, 2~10, jack, queen, king, ace
-	int x = 32, y = 5;
+	int x = 80, y = 14;
 	int i, j, k, v = 1, hide = 0;		//hide 0 숨김, 1 표시
 	int get = 3;
 	int num1 = 0, num2 = 0;
-	setColor(GREEN, WHITE);
 	for (k = 0; k < 2; k++)
 	{
 		if (k == 0) // 현재 뒷면인 상태
@@ -336,50 +335,50 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 			for (i = 0;i < 4;i++) // 카드가 나열되는 그래픽
 			{
 				num1 = 0;
-				for (j = 0;j < 15; j++)
+				for (j = 0; j < 15; j++)
 				{
 					Sleep(10);
-					gotoxy(x - num1, 30); cout << "┏━━━━┓";
-					gotoxy(x - num1, 31); cout << "┃?      ┃";
-					gotoxy(x - num1, 32); cout << "┃       ┃";
-					gotoxy(x - num1, 33); cout << "┃   ?   ┃";
-					gotoxy(x - num1, 34); cout << "┃       ┃";
-					gotoxy(x - num1, 35); cout << "┃      ?┃";
-					gotoxy(x - num1, 36); cout << "┗━━━━┛";
+					gotoxy(x - num1, 14); cout << "┏━━━━━━┓";
+					gotoxy(x - num1, 15); cout << "┃?     ┃";
+					gotoxy(x - num1, 16); cout << "┃      ┃";
+					gotoxy(x - num1, 17); cout << "┃   ?  ┃";
+					gotoxy(x - num1, 18); cout << "┃      ┃";
+					gotoxy(x - num1, 19); cout << "┃     ?┃";
+					gotoxy(x - num1, 20); cout << "┗━━━━━━┛";
 					num1 += 1;
 				}
 				x += 2;
 			}
 			num1 = 0;
-			for (i = 0;i < 4;i++) // 카드가 배분되는 그래픽
+			for (i = 0;i < 15;i++) // 카드가 배분되는 그래픽
 			{
 				num1 = 1;
 				if (i % 2 == 1)
 				{
-					num1 *= -2;
+					num1 *= -1;
 				}
 				for (j = 0;j < 7;j++)
 				{
 					Sleep(20);
 					if (i % 2 == 0)
 					{
-						gotoxy(10 - num2, 37 - num1); cout << "          ";
+						gotoxy(60 - num2, 21 - num1); cout << "          ";
 					}
-					gotoxy(10 - num2, 30 - num1); cout <<"┏━━━━┓";
-					gotoxy(10 - num2, 31 - num1); cout <<"┃?      ┃";
-					gotoxy(10 - num2, 32 - num1); cout <<"┃       ┃";
-					gotoxy(10 - num2, 33 - num1); cout <<"┃   ?   ┃";
-					gotoxy(10 - num2, 34 - num1); cout <<"┃       ┃";
-					gotoxy(10 - num2, 35 - num1); cout <<"┃      ?┃";
-					gotoxy(10 - num2, 36 - num1); cout <<"┗━━━━┛";
+					gotoxy(60 - num2, 14 - num1); cout <<"┏━━━━━━┓";
+					gotoxy(60 - num2, 15 - num1); cout <<"┃?     ┃";
+					gotoxy(60 - num2, 16 - num1); cout <<"┃      ┃";
+					gotoxy(60 - num2, 17 - num1); cout <<"┃   ?  ┃";
+					gotoxy(60 - num2, 18 - num1); cout <<"┃      ┃";
+					gotoxy(60 - num2, 19 - num1); cout <<"┃     ?┃";
+					gotoxy(60 - num2, 20 - num1); cout <<"┗━━━━━━┛";
 					if (i % 2 == 1)
 					{
-						gotoxy(10 - num2, 6 - num1); cout <<"          ";
+						gotoxy(60 - num2, 13 - num1); cout <<"          ";
 					}
 					if (i % 2 == 0)
-						num1 += 2;
+						num1 += 1;
 					else
-						num1 -= 2;
+						num1 -= 1;
 				}
 				num2 += 2;
 			}
@@ -388,6 +387,7 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 		}
 		else // 앞면인 상태
 		{
+			setColor(GREEN, WHITE);
 			num1 = 0;
 			num2 = 0;
 			j = 1;
@@ -401,103 +401,101 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 						hide = 1;
 						_getch();
 					}
-					//white();
-					gotoxy(4 + num1, 1); cout <<"┏━━━━━━┓";
-					gotoxy(4 + num1, 2); cout <<"┃      ┃";
-					gotoxy(4 + num1, 3); cout <<"┃      ┃";
-					gotoxy(4 + num1, 4); cout <<"┃      ┃";
-					gotoxy(4 + num1, 5); cout <<"┃      ┃";
-					gotoxy(4 + num1, 6); cout <<"┃      ┃";
-					gotoxy(4 + num1, 7); cout <<"┗━━━━━━┛";
+					gotoxy(60 + num1, 3); cout <<"┏━━━━━━┓";
+					gotoxy(60 + num1, 4); cout <<"┃      ┃";
+					gotoxy(60 + num1, 5); cout <<"┃      ┃";
+					gotoxy(60 + num1, 6); cout <<"┃      ┃";
+					gotoxy(60 + num1, 7); cout <<"┃      ┃";
+					gotoxy(60 + num1, 8); cout <<"┃      ┃";
+					gotoxy(60 + num1, 9); cout <<"┗━━━━━━┛";
 					//					if(hide != 1){
 					if (shape[shape_rand[j]] == 1) {
-						//white();
-						gotoxy(6 + num1, 2);cout <<"♠";
-						gotoxy(10 + num1, 6);cout <<"♠";
+						setColor(GREEN, BLACK);
+						gotoxy(62 + num1, 4);cout <<"♠";
+						gotoxy(66 + num1, 8);cout <<"♠";
 					}
 					else if (shape[shape_rand[j]] == 2) {
-						//red();
-						gotoxy(6 + num1, 2);cout <<"◆";
-						gotoxy(10 + num1, 6);cout <<"◆";
+						setColor(GREEN, RED);
+						gotoxy(62 + num1, 4);cout <<"◆";
+						gotoxy(66 + num1, 8);cout <<"◆";
 					}
 					else if (shape[shape_rand[j]] == 3) {
-						//red();
-						gotoxy(6 + num1, 2);cout <<"♥";
-						gotoxy(10 + num1, 6);cout <<"♥";
+						setColor(GREEN, RED);
+						gotoxy(62 + num1, 4);cout <<"♥";
+						gotoxy(66 + num1, 8);cout <<"♥";
 					}
 					else if (shape[shape_rand[j]] == 4) {
-						//white();
-						gotoxy(6 + num1, 2);cout <<"♣";
-						gotoxy(10 + num1, 6);cout <<"♣";
+						setColor(GREEN, BLACK);
+						gotoxy(62 + num1, 4);cout <<"♣";
+						gotoxy(66 + num1, 8);cout <<"♣";
 					}
 					if (number[num1_rand[j]] == 13) {
-						gotoxy(9 + num1, 4);cout <<"A";
+						gotoxy(65 + num1, 6);cout <<"A";
 					}
 					else if (number[num1_rand[j]] == 10) {
-						gotoxy(9 + num1, 4);cout <<"J";
+						gotoxy(65 + num1, 6);cout <<"J";
 					}
 					else if (number[num1_rand[j]] == 11) {
-						gotoxy(9 + num1, 4);cout <<"Q";
+						gotoxy(65 + num1, 6);cout <<"Q";
 					}
 					else if (number[num1_rand[j]] == 12) {
-						gotoxy(9 + num1, 4);cout <<"K";
+						gotoxy(65 + num1, 6);cout <<"K";
 					}
 					else if (number[num1_rand[j]] == num1_rand[j] + 1) {
-						gotoxy(8 + num1, 4);cout << num1_rand[j];
+						gotoxy(65 + num1, 6);cout << num1_rand[j];
 					}
 					//					}
 					num1 += 12;
 					j++;			//배열을 1칸씩 증가 시킨다.
 				}
-				else
+				else // 아래칸 배열
 				{
 					if (i > get)
 					{
 						_getch();
 					}
 					Sleep(300);
-					//white();
-					gotoxy(4 + num2, 15);cout <<"┏━━━━━━┓";
-					gotoxy(4 + num2, 16);cout <<"┃      ┃";
-					gotoxy(4 + num2, 17);cout <<"┃      ┃";
-					gotoxy(4 + num2, 18);cout <<"┃      ┃";
-					gotoxy(4 + num2, 19);cout <<"┃      ┃";
-					gotoxy(4 + num2, 20);cout <<"┃      ┃";
-					gotoxy(4 + num2, 21);cout <<"┗━━━━━━┛";
+					gotoxy(60 + num2, 26); cout << "┏━━━━━━┓";
+					gotoxy(60 + num2, 27); cout << "┃      ┃";
+					gotoxy(60 + num2, 28); cout << "┃      ┃";
+					gotoxy(60 + num2, 29); cout << "┃      ┃";
+					gotoxy(60 + num2, 30); cout << "┃      ┃";
+					gotoxy(60 + num2, 31); cout << "┃      ┃";
+					gotoxy(60 + num2, 32); cout << "┗━━━━━━┛";
 					if (shape[shape_rand2[v]] == 1) {
-						//white();
-						gotoxy(6 + num2, 16);cout <<"♠";
-						gotoxy(10 + num2, 20);cout <<"♠";
+						setColor(GREEN, BLACK);
+						gotoxy(62 + num2, 27);cout << "♠";
+						gotoxy(66 + num2, 31);cout << "♠";
 					}
 					else if (shape[shape_rand2[v]] == 2) {
-						//red();
-						gotoxy(6 + num2, 16);cout <<"◆";
-						gotoxy(10 + num2, 20);cout <<"◆";
+						setColor(GREEN, RED);
+						gotoxy(62 + num2, 27);cout << "◆";
+						gotoxy(66 + num2, 31);cout << "◆";
 					}
 					else if (shape[shape_rand2[v]] == 3) {
-						//red();
-						gotoxy(6 + num2, 16);cout <<"♥";
-						gotoxy(10 + num2, 20);cout <<"♥";
+						setColor(GREEN, RED);
+						gotoxy(62 + num2, 27);cout << "♥";
+						gotoxy(66 + num2, 31);cout << "♥";
 					}
 					else if (shape[shape_rand2[v]] == 4) {
-						//white();
-						gotoxy(6 + num2, 16);cout <<"♣";
-						gotoxy(10 + num2, 20);cout <<"♣";
+						setColor(GREEN, BLACK);
+						gotoxy(62 + num2, 27);cout << "♣";
+						gotoxy(66 + num2, 31);cout << "♣";
 					}
 					if (number[num1_rand2[v]] == 13) {
-						gotoxy(9 + num2, 18);cout <<"A";
+						gotoxy(65 + num2, 29);cout << "A";
 					}
 					else if (number[num1_rand2[v]] == 10) {
-						gotoxy(9 + num2, 18);cout <<"J";
+						gotoxy(65 + num2, 29);cout <<"J";
 					}
 					else if (number[num1_rand2[v]] == 11) {
-						gotoxy(9 + num2, 18);cout <<"Q";
+						gotoxy(65 + num2, 29);cout <<"Q";
 					}
 					else if (number[num1_rand2[v]] == 12) {
-						gotoxy(9 + num2, 18);cout <<"K";
+						gotoxy(65 + num2, 29);cout <<"K";
 					}
 					else if (number[num1_rand2[v]] == num1_rand2[v] + 1) {
-						gotoxy(8 + num2, 18);cout << num1_rand2[v];
+						gotoxy(65 + num2, 29);cout << num1_rand2[v];
 					}
 					num2 += 12;
 					v++; //배열을 한칸씩 증가시킨다.
@@ -621,45 +619,41 @@ void printOrder(int result, int i) //
 
 	switch (result)
 	{
-		case 2:
+		case 1:
 			result_Dack(3, i, 0, results, patterns);
 			white(); cout <<"하이카드\n";
 			break;
-		case 3:
+		case 2:
 			result_Dack(5, i, 0, results, patterns);
 			white(); cout <<"원페어\n";
 			break;
-		case 4:
+		case 3:
 			result_Dack(5, i, 0, results, patterns);
 			white(); cout <<"투페어\n";
 			break;
-		case 5:
+		case 4:
 			result_Dack(5, i, 0, results, patterns);
-			white(); cout <<"쓰리카드\n";
+			white(); cout <<"트리플\n";
 			break;
-		case 6:
+		case 5:
 			result_Dack(5, i, 0, results, patterns);
 			white(); cout <<"스트레이트\n";
 			break;
-		case 7:
+		case 6:
 			result_Dack(5, i, 0, results, patterns);
 			white(); cout <<"플러쉬\n";
 			break;
-		case 8:
+		case 7:
 			result_Dack(4, i, 0, results, patterns);
 			white(); cout <<"풀하우스\n";
 			break;
-		case 9:
+		case 8:
 			result_Dack(5, i, 0, results, patterns);
 			white(); cout <<"포카드\n";
 			break;
-		case 10:
+		case 9:
 			result_Dack(5, i, 0, results, patterns);
 			white(); cout <<"스트레이트 플러시\n";
-			break;
-		case 11:
-			result_Dack(5, i, 0, results, patterns);
-			white(); cout <<"로얄 스트레이트 플러시\n";
 			break;
 	}
 }
