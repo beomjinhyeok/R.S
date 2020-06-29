@@ -5,12 +5,7 @@
 
 using namespace std;
 
-void arrsort(int R[], int S[], int a);
-//족보 검사 함수 Pedigree_check
-// 5장의 카드 족보 검사
-string Pedigree_check(int R[], int S[], int* ptr1, int* ptr2); // 덱의 숫자R[] , 문양S[] 매개변수로 전달
-
-int main()
+void shuffle()
 {
     srand(time(0));
     int deck[52];
@@ -33,17 +28,17 @@ int main()
         deck[j] = temp;
     }
 
-    // first check! 5카드 중 ace?
-    cout << endl;
-    for (int i = 0; i < 5; i++)
-    {
-        int acerank = 0;
-        int currentCardRank = deck[i] % 13;
-        if (currentCardRank == acerank)
-        {
-            cout << "Got an ace!" << endl;
-        }
-    }
+    //// first check! 5카드 중 ace?
+    //cout << endl;
+    //for (int i = 0; i < 5; i++)
+    //{
+    //    int acerank = 0;
+    //    int currentCardRank = deck[i] % 13;
+    //    if (currentCardRank == acerank)
+    //    {
+    //        cout << "Got an ace!" << endl;
+    //    }
+    //}
 
     int a = 0, b = 0, c = 0, d = 0, e = 0;
     int R_base[15], R0[5], R1[5], R2[5], R3[5], R4[5], R5[5]; // 카드 패 숫자 배열
@@ -114,29 +109,6 @@ int main()
     arrsort(R4a, S4a, 5);
     arrsort(R5a, S5a, 5);
 
-    //정렬된 숫자,문양 출력
-
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    cout << Number[R1a[i]] << " " << Pattern[S1a[i]] << "\n";
-    //}
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    cout << Number[R2a[i]] << " " << Pattern[S2a[i]] << "\n";
-    //}
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    cout << Number[R3a[i]] << " " << Pattern[S3a[i]] << "\n";
-    //}
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    cout << Number[R4a[i]] << " " << Pattern[S4a[i]] << "\n";
-    //}
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    cout << Number[R5a[i]] << " " << Pattern[S5a[i]] << "\n";
-    //}
-
     int max_number1, max_number2, max_number3, max_number4, max_number5;
     int max_pattern1, max_pattern2, max_pattern3, max_pattern4, max_pattern5;
     int* ptra1 = &max_number1; int* ptrb1 = &max_number2; int* ptrc1 = &max_number3; int* ptrd1 = &max_number4; int* ptre1 = &max_number5;
@@ -148,34 +120,4 @@ int main()
     string pedigree4 = Pedigree_check(R4a, S4a, ptrd1, ptrd2); //플레이어 4 족보
     string pedigree5 = Pedigree_check(R5a, S5a, ptre1, ptre2); //플레이어 5 족보
 
-    //cout << max_number1 << " " << max_pattern1 << endl;
-    //cout << "Pedigree1 = " << pedigree1 << endl;
-    //cout << "Pedigree1 = " << pedigree2 << endl;
-    //cout << "Pedigree1 = " << pedigree3 << endl;
-    //cout << "Pedigree1 = " << pedigree4 << endl;
-    //cout << "Pedigree1 = " << pedigree5 << endl;
-
-    //system("pause");
-    return 0;
-}
-
-// 배열 R 정렬
-void arrsort(int R[], int S[], int a)
-{
-    bool swapped = false;
-    do
-    {
-        // 1 pass of the bubble sort
-        swapped = false;
-        for (int i = 0; i < a; i++)
-        {
-            if (R[i] > R[i + 1])
-            {
-                int temp = R[i];
-                R[i] = R[i + 1];
-                R[i + 1] = temp;
-                swapped = true;
-            }
-        }
-    } while (swapped == true);
 }
