@@ -1,6 +1,8 @@
 #pragma once
 #include "main.h"
 
+int Play_number[6] = { 0 }, Computer_number[6] = { 0 }, Play_pattern[6] = { 0 }, Computer_pattern[6] = { 0 };
+int card_one = 0, reset_count = 0, temp[8] = { 0 }, results[5] = { 0 }, patterns[5] = { 0 };
 
 int main()
 {

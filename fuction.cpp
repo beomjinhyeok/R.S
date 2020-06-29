@@ -18,7 +18,7 @@ void init()
 	ConsoleCursor.dwSize = 1;
 	SetConsoleCursorInfo(consoleHandle, &ConsoleCursor);
 	system("color F5");
-	//setColor(WHITE, GREEN); // 게임화면 만들때 사용
+	//setColor(WHITE, GREEN); // 게임화면 만들때 사용..
 }
 
 void gotoxy(int x, int y)
@@ -188,83 +188,99 @@ int bettingMenuChoice()
 	while (1) {
 		int n = keyControl();
 		switch (n) {
-		case RIGHT: 
-		{
-			if (x < 100) 
-			{	
-				gotoxy(x - 2, y); cout << " ";
-				x = x + 10;
-				gotoxy(x - 2, y); cout << ">";
+			case RIGHT: 
+			{
+				if (x < 100) 
+				{	
+					gotoxy(x - 2, y); cout << " ";
+					x = x + 10;
+					gotoxy(x - 2, y); cout << ">";
+				}
+				break;
 			}
-			break;
-		}
 
-		case LEFT:
-		{
-			if (x > 60)
+			case LEFT:
+			{
+				if (x > 60)
+				{
+					gotoxy(x - 2, y); cout << " ";
+					x = x - 10;
+					gotoxy(x - 2, y); cout << ">";
+				}
+				break;
+			}
+
+			case CHOICE:
 			{
 				gotoxy(x - 2, y); cout << " ";
-				x = x - 10;
-				gotoxy(x - 2, y); cout << ">";
+				return x - 50;
 			}
-			break;
-		}
-
-		case CHOICE:
-		{
-			return x - 60;
-		}
-
 		}
 	}
 
 }
-
-void bettingNumber() 
+void bettingPrint(int x) //베팅 문자 출력 
 {
-	while (1) {
-		int bettingMenuNumber = bettingMenuChoice(); // 베팅메뉴 선택 함수
-		setColor(GREEN, WHITE);
-		if (bettingMenuNumber == 0) // 콜
-		{
+	switch (x / 10) {
+		case 0:  // 빈 화면
+			setColor(GREEN, GREEN);
+			for (int i = 17; i < 22; i++)
+			{
+				gotoxy(45, i);
+				cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
+			}
+			break;
+
+		case 1: // 콜
 			gotoxy(45, 17); cout << "                □□□□□         □         □             □                        ";
 			gotoxy(45, 18); cout << "                □               □  □       □             □                        ";
 			gotoxy(45, 19); cout << "                □             □□□□□     □             □                        ";
 			gotoxy(45, 20); cout << "                □             □      □     □             □                        ";
 			gotoxy(45, 21); cout << "                □□□□□     □      □     □□□□□     □□□□□                ";
-		}
-		else if (bettingMenuNumber == 10) // 다이
-		{
+			break;
+
+		case 2: // 다이
 			gotoxy(45, 17); cout << "                       □□□□         □□□       □□□□□                        ";
 			gotoxy(45, 18); cout << "                       □     □          □         □                                ";
 			gotoxy(45, 19); cout << "                       □      □         □         □□□□□                        ";
 			gotoxy(45, 20); cout << "                       □     □          □         □                                ";
 			gotoxy(45, 21); cout << "                       □□□□         □□□       □□□□□                        ";
-		}
-		else if (bettingMenuNumber == 20) // 더블
-		{
+			break;
+
+		case 3: // 더블
 			gotoxy(45, 17); cout << " □□□□       □□□□□     □      □     □□□□       □             □□□□□ ";
 			gotoxy(45, 18); cout << " □     □      □      □     □      □     □     □      □             □         ";
 			gotoxy(45, 19); cout << " □      □     □      □     □      □     □□□□       □             □□□□□ ";
 			gotoxy(45, 20); cout << " □     □      □      □     □      □     □     □      □             □         ";
 			gotoxy(45, 21); cout << " □□□□       □□□□□     □□□□□     □□□□       □□□□□     □□□□□ ";
-		}
-		else if (bettingMenuNumber == 30) // 하프
-		{
+			break;
+
+		case 4: // 하프
 			gotoxy(45, 17); cout << "                □      □         □         □             □□□□□                ";
 			gotoxy(45, 18); cout << "                □      □       □  □       □             □                        ";
 			gotoxy(45, 19); cout << "                □□□□□     □□□□□     □             □□□□□                ";
 			gotoxy(45, 20); cout << "                □      □     □      □     □             □                        ";
 			gotoxy(45, 21); cout << "                □      □     □      □     □□□□□     □                        ";
-		}
-		else if (bettingMenuNumber == 40) // 올인
-		{
-			gotoxy(45, 17); cout << "     □         □             □                 □□□       □      □   ";
-			gotoxy(45, 18); cout << "   □  □       □             □                   □         □□    □   ";
-			gotoxy(45, 19); cout << " □□□□□     □             □                   □         □  □  □   ";
-			gotoxy(45, 20); cout << " □      □     □             □                   □         □    □□   ";
-			gotoxy(45, 21); cout << " □      □     □□□□□     □□□□□         □□□       □      □   ";
-		}
+			break;
+
+		case 5:  // 올인
+			gotoxy(45, 17); cout << "         □         □             □                 □□□       □      □          ";
+			gotoxy(45, 18); cout << "       □  □       □             □                   □         □□    □          ";
+			gotoxy(45, 19); cout << "     □□□□□     □             □                   □         □  □  □          ";
+			gotoxy(45, 20); cout << "     □      □     □             □                   □         □    □□          ";
+			gotoxy(45, 21); cout << "     □      □     □□□□□     □□□□□         □□□       □      □          ";
+			break;
+	}
+}
+
+void bettingNumber() 
+{
+	while (1) {
+		int x = bettingMenuChoice(); // 베팅메뉴 선택 함수
+		setColor(GREEN, WHITE);
+		bettingPrint(x);
+		Sleep(2000);
+		bettingPrint(0);
 	}
 }
 
@@ -290,9 +306,10 @@ void defeatPrint()
 
 void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 {
+	setColor(GREEN, WHITE);
 	int shape[5] = { 0,1,2,3,4 }; //null, spade, diamond, heart, cluber
-	int num1ber[14] = { 0,2,3,4,5,6,7,8,9,10,11,12,13,1 }; //null, 2~10, jack, queen, king, ace
-	int x = 28, y = 29;
+	int number[14] = { 0,2,3,4,5,6,7,8,9,10,11,12,13,1 }; //null, 2~10, jack, queen, king, ace
+	int x = 32, y = 5;
 	int i, j, k, v = 1, hide = 0;		//hide 0 숨김, 1 표시
 	int get = 3;
 	int num1 = 0, num2 = 0;
@@ -301,53 +318,53 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 	{
 		if (k == 0) // 현재 뒷면인 상태
 		{
-			for (i = 0;i < 4;i++)
+			for (i = 0;i < 4;i++) // 카드가 나열되는 그래픽
 			{
 				num1 = 0;
-				for (j = 0;j < 25;j++)
+				for (j = 0;j < 15; j++)
 				{
 					Sleep(10);
-					gotoxy(x - num1, 8); printf("┏--------┓");
-					gotoxy(x - num1, 9); printf("┃?       ┃");
-					gotoxy(x - num1, 10);printf("┃        ┃");
-					gotoxy(x - num1, 11);printf("┃   ??   ┃");
-					gotoxy(x - num1, 12);printf("┃        ┃");
-					gotoxy(x - num1, 13);printf("┃       ?┃");
-					gotoxy(x - num1, 14);printf("┗━━━━┛");
+					gotoxy(x - num1, 30); cout << "┏━━━━┓";
+					gotoxy(x - num1, 31); cout << "┃?      ┃";
+					gotoxy(x - num1, 32); cout << "┃       ┃";
+					gotoxy(x - num1, 33); cout << "┃   ?   ┃";
+					gotoxy(x - num1, 34); cout << "┃       ┃";
+					gotoxy(x - num1, 35); cout << "┃      ?┃";
+					gotoxy(x - num1, 36); cout << "┗━━━━┛";
 					num1 += 1;
 				}
 				x += 2;
 			}
 			num1 = 0;
-			for (i = 0;i < 4;i++)
+			for (i = 0;i < 4;i++) // 카드가 배분되는 그래픽
 			{
 				num1 = 1;
 				if (i % 2 == 1)
 				{
-					num1 *= -1;
+					num1 *= -2;
 				}
 				for (j = 0;j < 7;j++)
 				{
 					Sleep(20);
 					if (i % 2 == 0)
 					{
-						gotoxy(10 - num2, 15 - num1);printf("          ");
+						gotoxy(10 - num2, 37 - num1); cout << "          ";
 					}
-					gotoxy(10 - num2, 8 - num1); printf("┏━━━┓");
-					gotoxy(10 - num2, 9 - num1); printf("┃?     ┃");
-					gotoxy(10 - num2, 10 - num1);printf("┃      ┃");
-					gotoxy(10 - num2, 11 - num1);printf("┃   ?  ┃");
-					gotoxy(10 - num2, 12 - num1);printf("┃      ┃");
-					gotoxy(10 - num2, 13 - num1);printf("┃     ?┃");
-					gotoxy(10 - num2, 14 - num1);printf("┗━━━┛");
+					gotoxy(10 - num2, 30 - num1); cout <<"┏━━━━┓";
+					gotoxy(10 - num2, 31 - num1); cout <<"┃?      ┃";
+					gotoxy(10 - num2, 32 - num1); cout <<"┃       ┃";
+					gotoxy(10 - num2, 33 - num1); cout <<"┃   ?   ┃";
+					gotoxy(10 - num2, 34 - num1); cout <<"┃       ┃";
+					gotoxy(10 - num2, 35 - num1); cout <<"┃      ?┃";
+					gotoxy(10 - num2, 36 - num1); cout <<"┗━━━━┛";
 					if (i % 2 == 1)
 					{
-						gotoxy(10 - num2, 7 - num1);printf("          ");
+						gotoxy(10 - num2, 6 - num1); cout <<"          ";
 					}
 					if (i % 2 == 0)
-						num1 += 1;
+						num1 += 2;
 					else
-						num1 -= 1;
+						num1 -= 2;
 				}
 				num2 += 2;
 			}
@@ -370,48 +387,48 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 						_getch();
 					}
 					//white();
-					gotoxy(4 + num1, 1);printf("┏━━━┓");
-					gotoxy(4 + num1, 2);printf("┃?     ┃");
-					gotoxy(4 + num1, 3);printf("┃      ┃");
-					gotoxy(4 + num1, 4);printf("┃   ?  ┃");
-					gotoxy(4 + num1, 5);printf("┃      ┃");
-					gotoxy(4 + num1, 6);printf("┃     ?┃");
-					gotoxy(4 + num1, 7);printf("┗━━━┛");
+					gotoxy(4 + num1, 1); cout <<"┏━━━┓";
+					gotoxy(4 + num1, 2); cout <<"┃?     ┃";
+					gotoxy(4 + num1, 3); cout <<"┃      ┃";
+					gotoxy(4 + num1, 4); cout <<"┃   ?  ┃";
+					gotoxy(4 + num1, 5); cout <<"┃      ┃";
+					gotoxy(4 + num1, 6); cout <<"┃     ?┃";
+					gotoxy(4 + num1, 7); cout <<"┗━━━┛";
 					//					if(hide != 1){
 					if (shape[shape_rand[j]] == 1) {
 						//white();
-						gotoxy(6 + num1, 2);printf("♠");
-						gotoxy(10 + num1, 6);printf("♠");
+						gotoxy(6 + num1, 2);cout <<"♠";
+						gotoxy(10 + num1, 6);cout <<"♠";
 					}
 					else if (shape[shape_rand[j]] == 2) {
 						//red();
-						gotoxy(6 + num1, 2);printf("◆");
-						gotoxy(10 + num1, 6);printf("◆");
+						gotoxy(6 + num1, 2);cout <<"◆";
+						gotoxy(10 + num1, 6);cout <<"◆";
 					}
 					else if (shape[shape_rand[j]] == 3) {
 						//red();
-						gotoxy(6 + num1, 2);printf("♥");
-						gotoxy(10 + num1, 6);printf("♥");
+						gotoxy(6 + num1, 2);cout <<"♥";
+						gotoxy(10 + num1, 6);cout <<"♥";
 					}
 					else if (shape[shape_rand[j]] == 4) {
 						//white();
-						gotoxy(6 + num1, 2);printf("♣");
-						gotoxy(10 + num1, 6);printf("♣");
+						gotoxy(6 + num1, 2);cout <<"♣";
+						gotoxy(10 + num1, 6);cout <<"♣";
 					}
-					if (num1ber[num1_rand[j]] == 13) {
-						gotoxy(9 + num1, 4);printf("A");
+					if (number[num1_rand[j]] == 13) {
+						gotoxy(9 + num1, 4);cout <<"A";
 					}
-					else if (num1ber[num1_rand[j]] == 10) {
-						gotoxy(9 + num1, 4);printf("J");
+					else if (number[num1_rand[j]] == 10) {
+						gotoxy(9 + num1, 4);cout <<"J";
 					}
-					else if (num1ber[num1_rand[j]] == 11) {
-						gotoxy(9 + num1, 4);printf("Q");
+					else if (number[num1_rand[j]] == 11) {
+						gotoxy(9 + num1, 4);cout <<"Q";
 					}
-					else if (num1ber[num1_rand[j]] == 12) {
-						gotoxy(9 + num1, 4);printf("K");
+					else if (number[num1_rand[j]] == 12) {
+						gotoxy(9 + num1, 4);cout <<"K";
 					}
-					else if (num1ber[num1_rand[j]] == num1_rand[j]+1) {
-						gotoxy(8 + num1, 4);printf("%2d", num1_rand[j]);
+					else if (number[num1_rand[j]] == num1_rand[j] + 1) {
+						gotoxy(8 + num1, 4);cout << num1_rand[j];
 					}
 					//					}
 					num1 += 12;
@@ -425,47 +442,47 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 					}
 					Sleep(300);
 					//white();
-					gotoxy(4 + num2, 15);printf("┏━━━┓");
-					gotoxy(4 + num2, 16);printf("┃      ┃");
-					gotoxy(4 + num2, 17);printf("┃      ┃");
-					gotoxy(4 + num2, 18);printf("┃      ┃");
-					gotoxy(4 + num2, 19);printf("┃      ┃");
-					gotoxy(4 + num2, 20);printf("┃      ┃");
-					gotoxy(4 + num2, 21);printf("┗━━━┛");
+					gotoxy(4 + num2, 15);cout <<"┏━━━┓";
+					gotoxy(4 + num2, 16);cout <<"┃      ┃";
+					gotoxy(4 + num2, 17);cout <<"┃      ┃";
+					gotoxy(4 + num2, 18);cout <<"┃      ┃";
+					gotoxy(4 + num2, 19);cout <<"┃      ┃";
+					gotoxy(4 + num2, 20);cout <<"┃      ┃";
+					gotoxy(4 + num2, 21);cout <<"┗━━━┛";
 					if (shape[shape_rand2[v]] == 1) {
 						//white();
-						gotoxy(6 + num2, 16);printf("♠");
-						gotoxy(10 + num2, 20);printf("♠");
-					}					
+						gotoxy(6 + num2, 16);cout <<"♠";
+						gotoxy(10 + num2, 20);cout <<"♠";
+					}
 					else if (shape[shape_rand2[v]] == 2) {
 						//red();
-						gotoxy(6 + num2, 16);printf("◆");
-						gotoxy(10 + num2, 20);printf("◆");
-					}					
+						gotoxy(6 + num2, 16);cout <<"◆";
+						gotoxy(10 + num2, 20);cout <<"◆";
+					}
 					else if (shape[shape_rand2[v]] == 3) {
 						//red();
-						gotoxy(6 + num2, 16);printf("♥");
-						gotoxy(10 + num2, 20);printf("♥");
+						gotoxy(6 + num2, 16);cout <<"♥";
+						gotoxy(10 + num2, 20);cout <<"♥";
 					}
 					else if (shape[shape_rand2[v]] == 4) {
 						//white();
-						gotoxy(6 + num2, 16);printf("♣");
-						gotoxy(10 + num2, 20);printf("♣");
+						gotoxy(6 + num2, 16);cout <<"♣";
+						gotoxy(10 + num2, 20);cout <<"♣";
 					}
-					if (num1ber[num1_rand2[v]] == 13) {
-						gotoxy(9 + num2, 18);printf("A");
+					if (number[num1_rand2[v]] == 13) {
+						gotoxy(9 + num2, 18);cout <<"A";
 					}
-					else if (num1ber[num1_rand2[v]] == 10) {
-						gotoxy(9 + num2, 18);printf("J");
+					else if (number[num1_rand2[v]] == 10) {
+						gotoxy(9 + num2, 18);cout <<"J";
 					}
-					else if (num1ber[num1_rand2[v]] == 11) {
-						gotoxy(9 + num2, 18);printf("Q");
+					else if (number[num1_rand2[v]] == 11) {
+						gotoxy(9 + num2, 18);cout <<"Q";
 					}
-					else if (num1ber[num1_rand2[v]] == 12) {
-						gotoxy(9 + num2, 18);printf("K");
+					else if (number[num1_rand2[v]] == 12) {
+						gotoxy(9 + num2, 18);cout <<"K";
 					}
-					else if (num1ber[num1_rand2[v]] == num1_rand2[v]+1) {
-						gotoxy(8 + num2, 18);printf("%2d", num1_rand2[v]);
+					else if (number[num1_rand2[v]] == num1_rand2[v] + 1) {
+						gotoxy(8 + num2, 18);cout << num1_rand2[v];
 					}
 					num2 += 12;
 					v++; //배열을 한칸씩 증가시킨다.
@@ -482,47 +499,47 @@ void result_Dack(int size, int count, int re, int* number, int* pattern)
 	if (count == 0) {
 		for (i = 1; i <= size; i++) {
 			white();
-			gotoxy(14 + jump, 4);printf("┏━━━┓");
-			gotoxy(14 + jump, 5);printf("┃      ┃");
-			gotoxy(14 + jump, 6);printf("┃      ┃");
-			gotoxy(14 + jump, 7);printf("┃      ┃");
-			gotoxy(14 + jump, 8);printf("┃      ┃");
-			gotoxy(14 + jump, 9);printf("┃      ┃");
-			gotoxy(14 + jump, 10);printf("┗━━━┛");
+			gotoxy(14 + jump, 4);cout <<"┏━━━┓";
+			gotoxy(14 + jump, 5);cout <<"┃      ┃";
+			gotoxy(14 + jump, 6);cout <<"┃      ┃";
+			gotoxy(14 + jump, 7);cout <<"┃      ┃";
+			gotoxy(14 + jump, 8);cout <<"┃      ┃";
+			gotoxy(14 + jump, 9);cout <<"┃      ┃";
+			gotoxy(14 + jump, 10);cout <<"┗━━━┛";
 			if (pattern[i - re] == 1) {
 				white();
-				gotoxy(16 + jump, 5);printf("♠");
-				gotoxy(20 + jump, 9);printf("♠");
+				gotoxy(16 + jump, 5);cout <<"♠";
+				gotoxy(20 + jump, 9);cout <<"♠";
 			}
 			else if (pattern[i - re] == 2) {
 				red();
-				gotoxy(16 + jump, 5);printf("◆");
-				gotoxy(20 + jump, 9);printf("◆");
+				gotoxy(16 + jump, 5);cout <<"◆";
+				gotoxy(20 + jump, 9);cout <<"◆";
 			}
 			else if (pattern[i - re] == 3) {
 				red();
-				gotoxy(16 + jump, 5);printf("♥");
-				gotoxy(20 + jump, 9);printf("♥");
+				gotoxy(16 + jump, 5);cout <<"♥";
+				gotoxy(20 + jump, 9);cout <<"♥";
 			}
 			else if (pattern[i - re] == 4) {
 				white();
-				gotoxy(16 + jump, 5);printf("♣");
-				gotoxy(20 + jump, 9);printf("♣");
+				gotoxy(16 + jump, 5);cout <<"♣";
+				gotoxy(20 + jump, 9);cout <<"♣";
 			}
 			if (number[i - re] == 13) {
-				gotoxy(19 + jump, 7);printf("A");
+				gotoxy(19 + jump, 7);cout <<"A";
 			}
 			else if (number[i - re] == 10) {
-				gotoxy(19 + jump, 7);printf("J");
+				gotoxy(19 + jump, 7);cout <<"J";
 			}
 			else if (number[i - re] == 11) {
-				gotoxy(19 + jump, 7);printf("Q");
+				gotoxy(19 + jump, 7);cout <<"Q";
 			}
 			else if (number[i - re] == 12) {
-				gotoxy(19 + jump, 7);printf("K");
+				gotoxy(19 + jump, 7);cout <<"K";
 			}
 			else {
-				gotoxy(18 + jump, 7);printf("%2d", number[i - re]+1);
+				gotoxy(18 + jump, 7);cout << number[i - re] + 1;
 			}
 			jump += 10;
 		}
@@ -531,47 +548,47 @@ void result_Dack(int size, int count, int re, int* number, int* pattern)
 	{
 		for (i = 1; i <= size; i++) {
 			white();
-			gotoxy(14 + jump, 12);printf("┏━━━┓");
-			gotoxy(14 + jump, 13);printf("┃      ┃");
-			gotoxy(14 + jump, 14);printf("┃      ┃");
-			gotoxy(14 + jump, 15);printf("┃      ┃");
-			gotoxy(14 + jump, 16);printf("┃      ┃");
-			gotoxy(14 + jump, 17);printf("┃      ┃");
-			gotoxy(14 + jump, 18);printf("┗━━━┛");
+			gotoxy(14 + jump, 12);cout <<"┏━━━┓";
+			gotoxy(14 + jump, 13);cout <<"┃      ┃";
+			gotoxy(14 + jump, 14);cout <<"┃      ┃";
+			gotoxy(14 + jump, 15);cout <<"┃      ┃";
+			gotoxy(14 + jump, 16);cout <<"┃      ┃";
+			gotoxy(14 + jump, 17);cout <<"┃      ┃";
+			gotoxy(14 + jump, 18);cout <<"┗━━━┛";
 			if (pattern[i - re] == 1) {
 				white();
-				gotoxy(16 + jump, 13);printf("♠");
-				gotoxy(20 + jump, 17);printf("♠");
-			}			
+				gotoxy(16 + jump, 13);cout <<"♠";
+				gotoxy(20 + jump, 17);cout <<"♠";
+			}
 			else if (pattern[i - re] == 2) {
 				red();
-				gotoxy(16 + jump, 13);printf("◆");
-				gotoxy(20 + jump, 17);printf("◆");
+				gotoxy(16 + jump, 13);cout <<"◆";
+				gotoxy(20 + jump, 17);cout <<"◆";
 			}
 			else if (pattern[i - re] == 3) {
 				red();
-				gotoxy(16 + jump, 13);printf("♥");
-				gotoxy(20 + jump, 17);printf("♥");
+				gotoxy(16 + jump, 13);cout <<"♥";
+				gotoxy(20 + jump, 17);cout <<"♥";
 			}
 			else if (pattern[i - re] == 4) {
 				white();
-				gotoxy(16 + jump, 13);printf("♣");
-				gotoxy(20 + jump, 17);printf("♣");
+				gotoxy(16 + jump, 13);cout <<"♣";
+				gotoxy(20 + jump, 17);cout <<"♣";
 			}
 			if (number[i - re] == 13) {
-				gotoxy(19 + jump, 15);printf("A");
+				gotoxy(19 + jump, 15);cout <<"A";
 			}
 			else if (number[i - re] == 10) {
-				gotoxy(19 + jump, 15);printf("J");
+				gotoxy(19 + jump, 15);cout <<"J";
 			}
 			else if (number[i - re] == 11) {
-				gotoxy(19 + jump, 15);printf("Q");
+				gotoxy(19 + jump, 15);cout <<"Q";
 			}
 			else if (number[i - re] == 12) {
-				gotoxy(19 + jump, 15);printf("K");
+				gotoxy(19 + jump, 15);cout <<"K";
 			}
 			else {
-				gotoxy(18 + jump, 15);printf("%2d", number[i - re]+1);
+				gotoxy(18 + jump, 15);cout << number[i - re] + 1;
 			}
 			jump += 10;
 		}
@@ -582,52 +599,52 @@ void result_Dack(int size, int count, int re, int* number, int* pattern)
 		gotoxy(68, 6);
 }
 
-void print(int result, int i) //
+void printOrder(int result, int i) //
 {
 	white();
 
 	switch (result)
 	{
-	case 2:
-		result_Dack(3, i, 0, results, patterns);
-		white(); printf("하이카드\n");
-		break;
-	case 3:
-		result_Dack(5, i, 0, results, patterns);
-		white(); printf("원페어\n");
-		break;
-	case 4:
-		result_Dack(5, i, 0, results, patterns);
-		white(); printf("투페어\n");
-		break;
-	case 5:
-		result_Dack(5, i, 0, results, patterns);
-		white(); printf("쓰리카드\n");
-		break;
-	case 6:
-		result_Dack(5, i, 0, results, patterns);
-		white(); printf("스트레이트\n");
-		break;
-	case 7:
-		result_Dack(5, i, 0, results, patterns);
-		white(); printf("플러쉬\n");
-		break;
-	case 8:
-		result_Dack(4, i, 0, results, patterns);
-		white(); printf("풀하우스\n");
-		break;
-	case 9:
-		result_Dack(5, i, 0, results, patterns);
-		white(); printf("포카드\n");
-		break;
-	case 10:
-		result_Dack(5, i, 0, results, patterns);
-		white(); printf("스트레이트 플러시\n");
-		break;
-	case 11:
-		result_Dack(5, i, 0, results, patterns);
-		white(); printf("로얄 스트레이트 플러시\n");
-		break;
+		case 2:
+			result_Dack(3, i, 0, results, patterns);
+			white(); cout <<"하이카드\n";
+			break;
+		case 3:
+			result_Dack(5, i, 0, results, patterns);
+			white(); cout <<"원페어\n";
+			break;
+		case 4:
+			result_Dack(5, i, 0, results, patterns);
+			white(); cout <<"투페어\n";
+			break;
+		case 5:
+			result_Dack(5, i, 0, results, patterns);
+			white(); cout <<"쓰리카드\n";
+			break;
+		case 6:
+			result_Dack(5, i, 0, results, patterns);
+			white(); cout <<"스트레이트\n";
+			break;
+		case 7:
+			result_Dack(5, i, 0, results, patterns);
+			white(); cout <<"플러쉬\n";
+			break;
+		case 8:
+			result_Dack(4, i, 0, results, patterns);
+			white(); cout <<"풀하우스\n";
+			break;
+		case 9:
+			result_Dack(5, i, 0, results, patterns);
+			white(); cout <<"포카드\n";
+			break;
+		case 10:
+			result_Dack(5, i, 0, results, patterns);
+			white(); cout <<"스트레이트 플러시\n";
+			break;
+		case 11:
+			result_Dack(5, i, 0, results, patterns);
+			white(); cout <<"로얄 스트레이트 플러시\n";
+			break;
 	}
 }
 
