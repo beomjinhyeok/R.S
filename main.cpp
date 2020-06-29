@@ -1,7 +1,7 @@
 #pragma once
 #include "main.h"
 
-int Play_number[6] = { 0 }, Computer_number[6] = { 0 }, Play_pattern[6] = { 0 }, Computer_pattern[6] = { 0 };
+int Play_number[6] = { 0 }, Play_pattern[6] = { 0 };
 
 int main()
 {
@@ -12,7 +12,7 @@ int main()
 		if (menuNumber == 0) //게임 시작 버튼
 		{
 			gameImage();
-			picture(Play_number, Play_pattern, Computer_number, Computer_pattern);
+			picture(Play_number, Play_pattern);
 			bettingNumber(); // 베팅 종류를 선택하는 함수
 		}
 		else if (menuNumber == 1) // 게임 규칙 설명

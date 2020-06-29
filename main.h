@@ -4,7 +4,7 @@
 #include <conio.h>
 
 const char shape[5][10] = { "zero", "spade", "diamonds", "cluber", "heart" };
-const char num1ber[14][7] = { "zero","two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace" };
+const char number[14][7] = { "zero","two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace" };
 
 enum Color  //콘솔에서 사용하는 색상
 {
@@ -36,9 +36,6 @@ void bettingPrint(int x); // 베팅 문자 출력
 int bettingMenuChoice(); // 베팅 메뉴 이름 출력 함수
 void victoryPrint(); // 승리 시 화면 출력
 void defeatPrint();  // 패배 시 화면 출력
-void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2); //카드 구성 함수
-void result_Dack(int, int, int, int*, int*);
+void picture(int* num1_rand, int* shape_rand); //공유 카드 구성 함수
+void playerCard(int x, int y);
 void printOrder(int, int);
-void red();
-void white();
-void blue();

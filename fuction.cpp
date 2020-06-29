@@ -10,7 +10,7 @@ void setColor(int back, int text)
 
 void init()
 {
-	system("mode con cols=176 lines=50 | title 텍사스 홀덤 ");
+	system("mode con cols=176 lines=45 | title 텍사스 홀덤 ");
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO ConsoleCursor;
 	ConsoleCursor.bVisible = 0;
@@ -113,6 +113,8 @@ int menuChoice()
 
 void gameImage()
 {	
+	int x = 65;
+	int y = 40;
 	system("color 02");
 	system("cls");
 	setColor(GREEN, GREEN);
@@ -130,21 +132,17 @@ void gameImage()
 	gotoxy(29, 0);	cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
 	gotoxy(29, 35); cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
 	
-	player(10, 3);
-	cout << "도영";
-	player(10, 18);
-	cout << "진혁";
-	player(150, 3);
-	cout << "정훈";
-	player(150, 18);
-	cout << "강민";
-	gotoxy(80, 36); cout << "참가자";
+	player(10, 3);  cout << "도영";
+	player(10, 18); cout << "진혁";
+	player(150, 3); cout << "정훈";
+	player(150, 18);cout << "강민";
+	gotoxy(85, 36); cout << "참가자";
 
-	gotoxy(60, 40); cout << "콜";
-	gotoxy(70, 40); cout << "다이";
-	gotoxy(80, 40); cout << "더블";
-	gotoxy(90, 40); cout << "하프";
-	gotoxy(100, 40); cout << "올인";
+	gotoxy(x, y);  cout << "콜";
+	gotoxy(x + 10, y); cout << "다이";
+	gotoxy(x + 20, y); cout << "더블";
+	gotoxy(x + 30, y); cout << "하프";
+	gotoxy(x + 40, y); cout << "올인";
 
 	/*while (1)
 	{
@@ -192,7 +190,7 @@ void player(int x, int y)
 int bettingMenuChoice()
 {
 	setColor(BLACK, WHITE);
-	int x = 60;
+	int x = 65;
 	int y = 40;
 	gotoxy(x - 2, y);  cout << "> 콜";
 	gotoxy(x + 10, y); cout << "다이";
@@ -204,7 +202,7 @@ int bettingMenuChoice()
 		switch (n) {
 			case RIGHT: 
 			{
-				if (x < 100) 
+				if (x < 105) 
 				{	
 					gotoxy(x - 2, y); cout << " ";
 					x = x + 10;
@@ -215,7 +213,7 @@ int bettingMenuChoice()
 
 			case LEFT:
 			{
-				if (x > 60)
+				if (x > 65)
 				{
 					gotoxy(x - 2, y); cout << " ";
 					x = x - 10;
@@ -235,11 +233,11 @@ int bettingMenuChoice()
 }
 void bettingPrint(int x) //베팅 문자 출력 
 {
-	int y = 14;
+	int y = 12;
 	switch (x / 10) {
 		case 0:  // 빈 화면
 			setColor(GREEN, GREEN);
-			for (int i = y; i < 22; i++)
+			for (int i = y; i < y+5; i++)
 			{
 				gotoxy(45, i);
 				cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
@@ -319,14 +317,14 @@ void defeatPrint()
 	introGame(); // 시작화면의 표시부분 함수
 }
 
-void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
+void picture(int* num1_rand, int* shape_rand)
 {
 	setColor(GREEN, WHITE);
 	int shape[5] = { 0,1,2,3,4 }; //null, spade, diamond, heart, cluber
 	int number[14] = { 0,2,3,4,5,6,7,8,9,10,11,12,13,1 }; //null, 2~10, jack, queen, king, ace
-	int x = 80, y = 14;
+	int x = 100, y = 14;
 	int i, j, k, v = 1, hide = 0;		//hide 0 숨김, 1 표시
-	int get = 3;
+	int get = 4;
 	int num1 = 0, num2 = 0;
 	for (k = 0; k < 2; k++)
 	{
@@ -362,18 +360,18 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 					Sleep(20);
 					if (i % 2 == 0)
 					{
-						gotoxy(60 - num2, 21 - num1); cout << "          ";
+						gotoxy(80 - num2, 21 - num1); cout << "          ";
 					}
-					gotoxy(60 - num2, 14 - num1); cout <<"┏━━━━━━┓";
-					gotoxy(60 - num2, 15 - num1); cout <<"┃?     ┃";
-					gotoxy(60 - num2, 16 - num1); cout <<"┃      ┃";
-					gotoxy(60 - num2, 17 - num1); cout <<"┃   ?  ┃";
-					gotoxy(60 - num2, 18 - num1); cout <<"┃      ┃";
-					gotoxy(60 - num2, 19 - num1); cout <<"┃     ?┃";
-					gotoxy(60 - num2, 20 - num1); cout <<"┗━━━━━━┛";
+					gotoxy(80 - num2, 14 - num1); cout <<"┏━━━━━━┓";
+					gotoxy(80 - num2, 15 - num1); cout <<"┃?     ┃";
+					gotoxy(80 - num2, 16 - num1); cout <<"┃      ┃";
+					gotoxy(80 - num2, 17 - num1); cout <<"┃   ?  ┃";
+					gotoxy(80 - num2, 18 - num1); cout <<"┃      ┃";
+					gotoxy(80 - num2, 19 - num1); cout <<"┃     ?┃";
+					gotoxy(80 - num2, 20 - num1); cout <<"┗━━━━━━┛";
 					if (i % 2 == 1)
 					{
-						gotoxy(60 - num2, 13 - num1); cout <<"          ";
+						gotoxy(80 - num2, 13 - num1); cout <<"          ";
 					}
 					if (i % 2 == 0)
 						num1 += 1;
@@ -388,8 +386,12 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 		else // 앞면인 상태
 		{
 			setColor(GREEN, WHITE);
+			playerCard(35, 3);
+			playerCard(125, 3);
+			playerCard(35, 18);
+			playerCard(125, 18);
+			playerCard(80, 25);
 			num1 = 0;
-			num2 = 0;
 			j = 1;
 			for (i = 0;i < 10;i++)
 			{
@@ -448,225 +450,52 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 					num1 += 12;
 					j++;			//배열을 1칸씩 증가 시킨다.
 				}
-				else // 아래칸 배열
-				{
-					if (i > get)
-					{
-						_getch();
-					}
-					Sleep(300);
-					gotoxy(60 + num2, 26); cout << "┏━━━━━━┓";
-					gotoxy(60 + num2, 27); cout << "┃      ┃";
-					gotoxy(60 + num2, 28); cout << "┃      ┃";
-					gotoxy(60 + num2, 29); cout << "┃      ┃";
-					gotoxy(60 + num2, 30); cout << "┃      ┃";
-					gotoxy(60 + num2, 31); cout << "┃      ┃";
-					gotoxy(60 + num2, 32); cout << "┗━━━━━━┛";
-					if (shape[shape_rand2[v]] == 1) {
-						setColor(GREEN, BLACK);
-						gotoxy(62 + num2, 27);cout << "♠";
-						gotoxy(66 + num2, 31);cout << "♠";
-					}
-					else if (shape[shape_rand2[v]] == 2) {
-						setColor(GREEN, RED);
-						gotoxy(62 + num2, 27);cout << "◆";
-						gotoxy(66 + num2, 31);cout << "◆";
-					}
-					else if (shape[shape_rand2[v]] == 3) {
-						setColor(GREEN, RED);
-						gotoxy(62 + num2, 27);cout << "♥";
-						gotoxy(66 + num2, 31);cout << "♥";
-					}
-					else if (shape[shape_rand2[v]] == 4) {
-						setColor(GREEN, BLACK);
-						gotoxy(62 + num2, 27);cout << "♣";
-						gotoxy(66 + num2, 31);cout << "♣";
-					}
-					if (number[num1_rand2[v]] == 13) {
-						gotoxy(65 + num2, 29);cout << "A";
-					}
-					else if (number[num1_rand2[v]] == 10) {
-						gotoxy(65 + num2, 29);cout <<"J";
-					}
-					else if (number[num1_rand2[v]] == 11) {
-						gotoxy(65 + num2, 29);cout <<"Q";
-					}
-					else if (number[num1_rand2[v]] == 12) {
-						gotoxy(65 + num2, 29);cout <<"K";
-					}
-					else if (number[num1_rand2[v]] == num1_rand2[v] + 1) {
-						gotoxy(65 + num2, 29);cout << num1_rand2[v];
-					}
-					num2 += 12;
-					v++; //배열을 한칸씩 증가시킨다.
-				}
 			}
 		}
 	}
 }
 
-void result_Dack(int size, int count, int re, int* number, int* pattern)
+void playerCard(int x, int y)
 {
-	int i, jump = 0;			//jump = 카드값 위치 바꾸기
-
-	if (count == 0) {
-		for (i = 1; i <= size; i++) {
-			white();
-			gotoxy(14 + jump, 4);cout <<"┏━━━┓";
-			gotoxy(14 + jump, 5);cout <<"┃      ┃";
-			gotoxy(14 + jump, 6);cout <<"┃      ┃";
-			gotoxy(14 + jump, 7);cout <<"┃      ┃";
-			gotoxy(14 + jump, 8);cout <<"┃      ┃";
-			gotoxy(14 + jump, 9);cout <<"┃      ┃";
-			gotoxy(14 + jump, 10);cout <<"┗━━━┛";
-			if (pattern[i - re] == 1) {
-				white();
-				gotoxy(16 + jump, 5);cout <<"♠";
-				gotoxy(20 + jump, 9);cout <<"♠";
-			}
-			else if (pattern[i - re] == 2) {
-				red();
-				gotoxy(16 + jump, 5);cout <<"◆";
-				gotoxy(20 + jump, 9);cout <<"◆";
-			}
-			else if (pattern[i - re] == 3) {
-				red();
-				gotoxy(16 + jump, 5);cout <<"♥";
-				gotoxy(20 + jump, 9);cout <<"♥";
-			}
-			else if (pattern[i - re] == 4) {
-				white();
-				gotoxy(16 + jump, 5);cout <<"♣";
-				gotoxy(20 + jump, 9);cout <<"♣";
-			}
-			if (number[i - re] == 13) {
-				gotoxy(19 + jump, 7);cout <<"A";
-			}
-			else if (number[i - re] == 10) {
-				gotoxy(19 + jump, 7);cout <<"J";
-			}
-			else if (number[i - re] == 11) {
-				gotoxy(19 + jump, 7);cout <<"Q";
-			}
-			else if (number[i - re] == 12) {
-				gotoxy(19 + jump, 7);cout <<"K";
-			}
-			else {
-				gotoxy(18 + jump, 7);cout << number[i - re] + 1;
-			}
-			jump += 10;
-		}
-	}
-	if (count == 1)
-	{
-		for (i = 1; i <= size; i++) {
-			white();
-			gotoxy(14 + jump, 12);cout <<"┏━━━┓";
-			gotoxy(14 + jump, 13);cout <<"┃      ┃";
-			gotoxy(14 + jump, 14);cout <<"┃      ┃";
-			gotoxy(14 + jump, 15);cout <<"┃      ┃";
-			gotoxy(14 + jump, 16);cout <<"┃      ┃";
-			gotoxy(14 + jump, 17);cout <<"┃      ┃";
-			gotoxy(14 + jump, 18);cout <<"┗━━━┛";
-			if (pattern[i - re] == 1) {
-				white();
-				gotoxy(16 + jump, 13);cout <<"♠";
-				gotoxy(20 + jump, 17);cout <<"♠";
-			}
-			else if (pattern[i - re] == 2) {
-				red();
-				gotoxy(16 + jump, 13);cout <<"◆";
-				gotoxy(20 + jump, 17);cout <<"◆";
-			}
-			else if (pattern[i - re] == 3) {
-				red();
-				gotoxy(16 + jump, 13);cout <<"♥";
-				gotoxy(20 + jump, 17);cout <<"♥";
-			}
-			else if (pattern[i - re] == 4) {
-				white();
-				gotoxy(16 + jump, 13);cout <<"♣";
-				gotoxy(20 + jump, 17);cout <<"♣";
-			}
-			if (number[i - re] == 13) {
-				gotoxy(19 + jump, 15);cout <<"A";
-			}
-			else if (number[i - re] == 10) {
-				gotoxy(19 + jump, 15);cout <<"J";
-			}
-			else if (number[i - re] == 11) {
-				gotoxy(19 + jump, 15);cout <<"Q";
-			}
-			else if (number[i - re] == 12) {
-				gotoxy(19 + jump, 15);cout <<"K";
-			}
-			else {
-				gotoxy(18 + jump, 15);cout << number[i - re] + 1;
-			}
-			jump += 10;
-		}
-	}
-	if (count == 0)					//결과 값 위치 지정
-		gotoxy(68, 4);
-	else if (count == 1)
-		gotoxy(68, 6);
+	gotoxy(x, y);   cout << "┏━━━━━━┓┏━━━━━━┓";
+	gotoxy(x, y+1); cout << "┃      ┃┃      ┃";
+	gotoxy(x, y+2); cout << "┃      ┃┃      ┃";
+	gotoxy(x, y+3); cout << "┃      ┃┃      ┃";
+	gotoxy(x, y+4); cout << "┃      ┃┃      ┃";
+	gotoxy(x, y+5); cout << "┃      ┃┃      ┃";
+	gotoxy(x, y+6); cout << "┗━━━━━━┛┗━━━━━━┛";
 }
 
 void printOrder(int result, int i) //
 {
-	white();
-	int card_one = 0, reset_count = 0, temp[8] = { 0 }, results[5] = { 0 }, patterns[5] = { 0 };
-
 	switch (result)
 	{
 		case 1:
-			result_Dack(3, i, 0, results, patterns);
-			white(); cout <<"하이카드\n";
+			cout <<"하이카드\n";
 			break;
 		case 2:
-			result_Dack(5, i, 0, results, patterns);
-			white(); cout <<"원페어\n";
+			cout <<"원페어\n";
 			break;
 		case 3:
-			result_Dack(5, i, 0, results, patterns);
-			white(); cout <<"투페어\n";
+			cout <<"투페어\n";
 			break;
 		case 4:
-			result_Dack(5, i, 0, results, patterns);
-			white(); cout <<"트리플\n";
+			cout <<"트리플\n";
 			break;
 		case 5:
-			result_Dack(5, i, 0, results, patterns);
-			white(); cout <<"스트레이트\n";
+			cout <<"스트레이트\n";
 			break;
 		case 6:
-			result_Dack(5, i, 0, results, patterns);
-			white(); cout <<"플러쉬\n";
+			cout <<"플러쉬\n";
 			break;
 		case 7:
-			result_Dack(4, i, 0, results, patterns);
-			white(); cout <<"풀하우스\n";
+			cout <<"풀하우스\n";
 			break;
 		case 8:
-			result_Dack(5, i, 0, results, patterns);
-			white(); cout <<"포카드\n";
+			cout <<"포카드\n";
 			break;
 		case 9:
-			result_Dack(5, i, 0, results, patterns);
-			white(); cout <<"스트레이트 플러시\n";
+			cout <<"스트레이트 플러시\n";
 			break;
 	}
-}
-
-void red()
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
-}
-void white()
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-}
-void blue()
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE);
 }
