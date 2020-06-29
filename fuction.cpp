@@ -11,7 +11,6 @@ void setColor(int back, int text)
 void init()
 {
 	system("mode con cols=176 lines=50 | title 텍사스 홀덤 ");
-
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO ConsoleCursor;
 	ConsoleCursor.bVisible = 0;
@@ -31,6 +30,7 @@ void gotoxy(int x, int y)
 
 void introGame()
 {
+	setColor(WHITE, BLACK);
 	gotoxy(45, 5); cout << "       □□□□□     □□□□□     □      □         □         □□□□□";
 	gotoxy(45, 6); cout << "           □         □               □  □         □  □       □        ";
 	gotoxy(45, 7); cout << "           □         □□□□□         □         □□□□□       □□□  ";
@@ -116,11 +116,20 @@ void gameImage()
 	system("color 02");
 	system("cls");
 	setColor(GREEN, GREEN);
-	for (int i = 0; i < 35; i++)
+	for (int i = 1; i < 35; i++)
 	{
 		gotoxy(30, i);
 		cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
 	}
+	setColor(WHITE, WHITE);
+	for (int i = 0; i < 35; i++)
+	{
+		gotoxy(29, i); cout << "▒";
+		gotoxy(145, i); cout << "▒";
+	}
+	gotoxy(29, 0);	cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
+	gotoxy(29, 35); cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
+	
 	player(10, 3);
 	cout << "도영";
 	player(10, 18);
@@ -129,7 +138,7 @@ void gameImage()
 	cout << "정훈";
 	player(150, 18);
 	cout << "강민";
-	gotoxy(80, 35); cout << "참가자";
+	gotoxy(80, 36); cout << "참가자";
 
 	gotoxy(60, 40); cout << "콜";
 	gotoxy(70, 40); cout << "다이";
@@ -150,7 +159,12 @@ void gameImage()
 void gameRule()
 {
 	system("cls");
-	gotoxy(15, 12); cout << "https://crash-landing.github.io" << endl;
+	gotoxy(15, 10); cout << "텍사스 홀덤 간단 요약"<< endl;
+	gotoxy(15, 10); cout << "1. 플레이어들은 개인별 손패 2장의 카드를 받습니다." << endl;
+	gotoxy(15, 11); cout << "2. 모든 플레이어들이 공유하는 커뮤니티 카드 5장이 주어집니다." << endl;
+	gotoxy(15, 12); cout << "3. 커뮤니티 카드 5장과 개인별 손패 2장의 카드의 조합이 가장 높은 플레이어가 승리합니다." << endl;
+	gotoxy(15, 13); cout << "카드 조합에 대한 자세한 설명은 아래 홈페이지를 참고하시기 바랍니다." << endl;
+	gotoxy(15, 14); cout << "https://crash-landing.github.io" << endl;
 	while (1)
 	{
 		if (keyControl() == CHOICE)
@@ -221,10 +235,11 @@ int bettingMenuChoice()
 }
 void bettingPrint(int x) //베팅 문자 출력 
 {
+	int y = 14;
 	switch (x / 10) {
 		case 0:  // 빈 화면
 			setColor(GREEN, GREEN);
-			for (int i = 17; i < 22; i++)
+			for (int i = y; i < 22; i++)
 			{
 				gotoxy(45, i);
 				cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
@@ -232,43 +247,43 @@ void bettingPrint(int x) //베팅 문자 출력
 			break;
 
 		case 1: // 콜
-			gotoxy(45, 17); cout << "                □□□□□         □         □             □                        ";
-			gotoxy(45, 18); cout << "                □               □  □       □             □                        ";
-			gotoxy(45, 19); cout << "                □             □□□□□     □             □                        ";
-			gotoxy(45, 20); cout << "                □             □      □     □             □                        ";
-			gotoxy(45, 21); cout << "                □□□□□     □      □     □□□□□     □□□□□                ";
+			gotoxy(45, y);   cout << "                ■■■■■         ■         ■           ■           ■           ";
+			gotoxy(45, y+1); cout << "                ■               ■  ■       ■           ■           ■           ";
+			gotoxy(45, y+2); cout << "                ■             ■■■■■     ■           ■           ■           ";
+			gotoxy(45, y+3); cout << "                ■             ■      ■     ■           ■                        ";
+			gotoxy(45, y+4); cout << "                ■■■■■     ■      ■     ■■■■     ■■■■     ■           ";
 			break;
 
 		case 2: // 다이
-			gotoxy(45, 17); cout << "                       □□□□         □□□       □□□□□                        ";
-			gotoxy(45, 18); cout << "                       □     □          □         □                                ";
-			gotoxy(45, 19); cout << "                       □      □         □         □□□□□                        ";
-			gotoxy(45, 20); cout << "                       □     □          □         □                                ";
-			gotoxy(45, 21); cout << "                       □□□□         □□□       □□□□□                        ";
+			gotoxy(45, y);   cout << "                       ■■■■         ■■■       ■■■■     ■                   ";
+			gotoxy(45, y+1); cout << "                       ■     ■          ■         ■           ■                   ";
+			gotoxy(45, y+2); cout << "                       ■      ■         ■         ■■■■     ■                   ";
+			gotoxy(45, y+3); cout << "                       ■     ■          ■         ■                                ";
+			gotoxy(45, y+4); cout << "                       ■■■■         ■■■       ■■■■     ■                   ";
 			break;
 
 		case 3: // 더블
-			gotoxy(45, 17); cout << " □□□□       □□□□□     □      □     □□□□       □             □□□□□ ";
-			gotoxy(45, 18); cout << " □     □      □      □     □      □     □     □      □             □         ";
-			gotoxy(45, 19); cout << " □      □     □      □     □      □     □□□□       □             □□□□□ ";
-			gotoxy(45, 20); cout << " □     □      □      □     □      □     □     □      □             □         ";
-			gotoxy(45, 21); cout << " □□□□       □□□□□     □□□□□     □□□□       □□□□□     □□□□□ ";
+			gotoxy(45, y);   cout << " ■■■■        ■■■■      ■      ■     ■■■■       ■           ■■■■     ■   ";
+			gotoxy(45, y+1); cout << " ■     ■      ■      ■     ■      ■     ■     ■      ■           ■           ■   ";
+			gotoxy(45, y+2); cout << " ■      ■     ■      ■     ■      ■     ■■■■       ■           ■■■■     ■   ";
+			gotoxy(45, y+3); cout << " ■     ■      ■      ■     ■      ■     ■     ■      ■           ■                ";
+			gotoxy(45, y+4); cout << " ■■■■        ■■■■       ■■■■      ■■■■       ■■■■     ■■■■     ■   ";
 			break;
 
 		case 4: // 하프
-			gotoxy(45, 17); cout << "                □      □         □         □             □□□□□                ";
-			gotoxy(45, 18); cout << "                □      □       □  □       □             □                        ";
-			gotoxy(45, 19); cout << "                □□□□□     □□□□□     □             □□□□□                ";
-			gotoxy(45, 20); cout << "                □      □     □      □     □             □                        ";
-			gotoxy(45, 21); cout << "                □      □     □      □     □□□□□     □                        ";
+			gotoxy(45, y);   cout << "                ■      ■         ■         ■           ■■■■     ■             ";
+			gotoxy(45, y+1); cout << "                ■      ■       ■  ■       ■           ■           ■             ";
+			gotoxy(45, y+2); cout << "                ■■■■■     ■■■■■     ■           ■■■■     ■             ";
+			gotoxy(45, y+3); cout << "                ■      ■     ■      ■     ■           ■                          ";
+			gotoxy(45, y+4); cout << "                ■      ■     ■      ■     ■■■■     ■           ■             ";
 			break;
 
 		case 5:  // 올인
-			gotoxy(45, 17); cout << "         □         □             □                 □□□       □      □          ";
-			gotoxy(45, 18); cout << "       □  □       □             □                   □         □□    □          ";
-			gotoxy(45, 19); cout << "     □□□□□     □             □                   □         □  □  □          ";
-			gotoxy(45, 20); cout << "     □      □     □             □                   □         □    □□          ";
-			gotoxy(45, 21); cout << "     □      □     □□□□□     □□□□□         □□□       □      □          ";
+			gotoxy(45, y);   cout << "         ■         ■           ■                ■■■       ■      ■     ■      ";
+			gotoxy(45, y+1); cout << "       ■  ■       ■           ■                  ■         ■■    ■     ■      ";
+			gotoxy(45, y+2); cout << "     ■■■■■     ■           ■                  ■         ■  ■  ■     ■      ";
+			gotoxy(45, y+3); cout << "     ■      ■     ■           ■                  ■         ■    ■■             ";
+			gotoxy(45, y+4); cout << "     ■      ■     ■■■■     ■■■■          ■■■       ■      ■     ■      ";
 			break;
 	}
 }
@@ -279,7 +294,7 @@ void bettingNumber()
 		int x = bettingMenuChoice(); // 베팅메뉴 선택 함수
 		setColor(GREEN, WHITE);
 		bettingPrint(x);
-		Sleep(2000);
+		Sleep(1000);
 		bettingPrint(0);
 	}
 }
@@ -387,13 +402,13 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 						_getch();
 					}
 					//white();
-					gotoxy(4 + num1, 1); cout <<"┏━━━┓";
-					gotoxy(4 + num1, 2); cout <<"┃?     ┃";
+					gotoxy(4 + num1, 1); cout <<"┏━━━━━━┓";
+					gotoxy(4 + num1, 2); cout <<"┃      ┃";
 					gotoxy(4 + num1, 3); cout <<"┃      ┃";
-					gotoxy(4 + num1, 4); cout <<"┃   ?  ┃";
+					gotoxy(4 + num1, 4); cout <<"┃      ┃";
 					gotoxy(4 + num1, 5); cout <<"┃      ┃";
-					gotoxy(4 + num1, 6); cout <<"┃     ?┃";
-					gotoxy(4 + num1, 7); cout <<"┗━━━┛";
+					gotoxy(4 + num1, 6); cout <<"┃      ┃";
+					gotoxy(4 + num1, 7); cout <<"┗━━━━━━┛";
 					//					if(hide != 1){
 					if (shape[shape_rand[j]] == 1) {
 						//white();
@@ -442,13 +457,13 @@ void picture(int* num1_rand, int* shape_rand, int* num1_rand2, int* shape_rand2)
 					}
 					Sleep(300);
 					//white();
-					gotoxy(4 + num2, 15);cout <<"┏━━━┓";
+					gotoxy(4 + num2, 15);cout <<"┏━━━━━━┓";
 					gotoxy(4 + num2, 16);cout <<"┃      ┃";
 					gotoxy(4 + num2, 17);cout <<"┃      ┃";
 					gotoxy(4 + num2, 18);cout <<"┃      ┃";
 					gotoxy(4 + num2, 19);cout <<"┃      ┃";
 					gotoxy(4 + num2, 20);cout <<"┃      ┃";
-					gotoxy(4 + num2, 21);cout <<"┗━━━┛";
+					gotoxy(4 + num2, 21);cout <<"┗━━━━━━┛";
 					if (shape[shape_rand2[v]] == 1) {
 						//white();
 						gotoxy(6 + num2, 16);cout <<"♠";
@@ -602,6 +617,7 @@ void result_Dack(int size, int count, int re, int* number, int* pattern)
 void printOrder(int result, int i) //
 {
 	white();
+	int card_one = 0, reset_count = 0, temp[8] = { 0 }, results[5] = { 0 }, patterns[5] = { 0 };
 
 	switch (result)
 	{
