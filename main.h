@@ -39,3 +39,11 @@ void defeatPrint();  // 패배 시 화면 출력
 void picture(int* num1_rand, int* shape_rand); //공유 카드 구성 함수
 void playerCard(int x, int y, int number);
 void printOrder(int);
+void Print_result(int i, int result);
+void printAll(int* num1_rand, int* shape_rand);
+void PrintMCard(int x, int y, int* num1_rand, int* shape_rand);
+void choice_betting();
+void choice_betting2();
+int betting_coin(int x);
+int betting_coin2(int x);
+void betting_all();

@@ -13,7 +13,12 @@ int main()
 		{
 			gameImage();
 			picture(Play_number, Play_pattern);
-			bettingNumber(); // 베팅 종류를 선택하는 함수
+			
+			choice_betting();
+			choice_betting2();
+			
+			printAll(Play_number, Play_pattern); // 플레이어들 카드 오픈 함수.
+			Print_result(1, 1);
 		}
 		else if (menuNumber == 1) // 게임 규칙 설명
 		{
@@ -27,8 +32,6 @@ int main()
 	}
 	return 0;
 }
-
-
 
 
 
