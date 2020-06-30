@@ -37,5 +37,5 @@ int bettingMenuChoice(); // 베팅 메뉴 이름 출력 함수
 void victoryPrint(); // 승리 시 화면 출력
 void defeatPrint();  // 패배 시 화면 출력
 void picture(int* num1_rand, int* shape_rand); //공유 카드 구성 함수
-void playerCard(int x, int y);
-void printOrder(int, int);
+void playerCard(int x, int y, int number);
+void printOrder(int);

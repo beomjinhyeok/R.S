@@ -113,8 +113,9 @@ int menuChoice()
 
 void gameImage()
 {	
-	int x = 65;
-	int y = 40;
+	char Play_name[5][10] = { "참가자", "도영", "강민", "진혁", "정훈" };
+	int x = 66;
+	int y = 41;
 	system("color 02");
 	system("cls");
 	setColor(GREEN, GREEN);
@@ -132,11 +133,12 @@ void gameImage()
 	gotoxy(29, 0);	cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
 	gotoxy(29, 35); cout << "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
 	
-	player(10, 3);  cout << "도영";
-	player(10, 18); cout << "진혁";
-	player(150, 3); cout << "정훈";
-	player(150, 18);cout << "강민";
-	gotoxy(85, 36); cout << "참가자";
+
+	player(10, 3);  cout << Play_name[1];
+	player(150, 3); cout << Play_name[2];
+	player(10, 18); cout << Play_name[3];
+	player(150, 18);cout << Play_name[4];
+	gotoxy(int(85.5), 37); cout << Play_name[0];
 
 	gotoxy(x, y);  cout << "콜";
 	gotoxy(x + 10, y); cout << "다이";
@@ -181,7 +183,7 @@ void player(int x, int y)
 	gotoxy(x, y + 1); cout << "■□□■■□□■\n";
 	gotoxy(x, y + 2); cout << "■□□■■□□■\n";
 	gotoxy(x, y + 3); cout << "■■■□□■■■\n";
-	gotoxy(x, y + 4); cout << "■□■■■■□■\n";
+	gotoxy(x, y + 4); cout << "■■■■■■■■\n";
 	gotoxy(x, y + 5); cout << "■□□□□□□■\n\n";
 	gotoxy(x, y + 6); cout << "■■■■■■■■\n\n";
 	gotoxy(x, y + 8); cout << "  참가자: ";
@@ -190,8 +192,8 @@ void player(int x, int y)
 int bettingMenuChoice()
 {
 	setColor(BLACK, WHITE);
-	int x = 65;
-	int y = 40;
+	int x = 66;
+	int y = 41;
 	gotoxy(x - 2, y);  cout << "> 콜";
 	gotoxy(x + 10, y); cout << "다이";
 	gotoxy(x + 20, y); cout << "더블";
@@ -386,11 +388,13 @@ void picture(int* num1_rand, int* shape_rand)
 		else // 앞면인 상태
 		{
 			setColor(GREEN, WHITE);
-			playerCard(35, 3);
-			playerCard(125, 3);
-			playerCard(35, 18);
-			playerCard(125, 18);
-			playerCard(80, 25);
+		
+			playerCard(80, 25, 0);
+			playerCard(35, 3, 1);
+			playerCard(125, 3, 2);
+			playerCard(35, 18, 3);
+			playerCard(125, 18, 4);
+		
 			num1 = 0;
 			j = 1;
 			for (i = 0;i < 10;i++)
@@ -455,18 +459,30 @@ void picture(int* num1_rand, int* shape_rand)
 	}
 }
 
-void playerCard(int x, int y)
+void playerCard(int x, int y, int number)
 {
-	gotoxy(x, y);   cout << "┏━━━━━━┓┏━━━━━━┓";
-	gotoxy(x, y+1); cout << "┃      ┃┃      ┃";
-	gotoxy(x, y+2); cout << "┃      ┃┃      ┃";
-	gotoxy(x, y+3); cout << "┃      ┃┃      ┃";
-	gotoxy(x, y+4); cout << "┃      ┃┃      ┃";
-	gotoxy(x, y+5); cout << "┃      ┃┃      ┃";
-	gotoxy(x, y+6); cout << "┗━━━━━━┛┗━━━━━━┛";
+	int r = 1; // memeber[number].checksurvivor = true
+	if (1) {
+		gotoxy(x, y);     cout << "┏━━━━━━┓┏━━━━━━┓";
+		gotoxy(x, y + 1); cout << "┃      ┃┃      ┃";
+		gotoxy(x, y + 2); cout << "┃      ┃┃      ┃";
+		gotoxy(x, y + 3); cout << "┃      ┃┃      ┃";
+		gotoxy(x, y + 4); cout << "┃      ┃┃      ┃";
+		gotoxy(x, y + 5); cout << "┃      ┃┃      ┃";
+		gotoxy(x, y + 6); cout << "┗━━━━━━┛┗━━━━━━┛";
+	}
+	else {
+		gotoxy(x, y);     cout << "								   ";
+		gotoxy(x, y + 1); cout << "								   ";
+		gotoxy(x, y + 2); cout << "								   ";
+		gotoxy(x, y + 3); cout << "								   ";
+		gotoxy(x, y + 4); cout << "								   ";
+		gotoxy(x, y + 5); cout << "								   ";
+		gotoxy(x, y + 6); cout << "								   ";
+	}
 }
 
-void printOrder(int result, int i) //
+void printOrder(int result) //
 {
 	switch (result)
 	{

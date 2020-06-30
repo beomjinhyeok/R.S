@@ -1,7 +1,7 @@
 #pragma once
 #include "main.h"
 
-int Play_number[6] = { 0 }, Play_pattern[6] = { 0 };
+int Play_number[6] = { 0, }, Play_pattern[6] = { 0 };
 
 int main()
 {
