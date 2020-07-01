@@ -1,8 +1,10 @@
 //족보 검사 함수 aPedigree_check
 // 5장의 카드 족보 검사
-
 int aPedigree_check(Player &nowPlay,int R[], int S[]) // 덱의 숫자R[] , 문양S[] 매개변수로 전달
 {
+    //먼저 배열 정렬
+    arrsort(R, S, 5);
+
     int ptr1, ptr2;
     // 처음에 Pedigree를  High_card로 초기화
     int Pedigree = High_card;
