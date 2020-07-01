@@ -1,5 +1,5 @@
 // 2번째 배팅시 사용하는 족보검사 함수 (카드 6장)
-int Bpedigree_check(Player& nowPlay, int R[], int S[], string a)
+int Bpedigree_check(Player& nowPlay, int R[], int S[], Player play)
 {
 	// 먼저 배열 정렬
 	arrsort(R, S, 6);
@@ -234,7 +234,7 @@ int Bpedigree_check(Player& nowPlay, int R[], int S[], string a)
 		ptr2 = S[5];
 		nowPlay.setMax(ptr1, ptr2);
 	}
-	if(a == "die")
+	if (play.checkPlay() == fasle)
 	{
 		pedigree = Die;
 	}
