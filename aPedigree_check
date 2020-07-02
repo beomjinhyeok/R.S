@@ -1,6 +1,6 @@
 //족보 검사 함수 aPedigree_check
 // 5장의 카드 족보 검사
-int aPedigree_check(Player &nowPlay,int R[], int S[]) // 덱의 숫자R[] , 문양S[] 매개변수로 전달
+int aPedigree_check(Player &nowPlay,int R[], int S[],Player play) // 덱의 숫자R[] , 문양S[], Player 매개변수로 전달
 {
     //먼저 배열 정렬
     arrsort(R, S, 5);
@@ -155,5 +155,9 @@ int aPedigree_check(Player &nowPlay,int R[], int S[]) // 덱의 숫자R[] , 문�
             ptr2 = S[4];
             nowPlay.setMax(ptr1, ptr2);
     }
+	if (play.checkPlay() == fasle)
+	{
+		pedigree = Die;
+	}
     return Pedigree;
 }
